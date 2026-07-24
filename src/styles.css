@@ -332,3 +332,29 @@
   .stagger > * { opacity: 1; transform: none; transition: none; }
 }
 
+
+/* === Foto de projeto: duotone que "acende" no hover === */
+.project-photo img {
+  filter: grayscale(0.8) contrast(1.05) brightness(0.92);
+  transition: filter 500ms ease-out, transform 700ms ease-out;
+}
+.project-photo .tint {
+  background: #131C33;
+  mix-blend-mode: color;
+  opacity: 0.55;
+  transition: opacity 500ms ease-out;
+}
+.group:hover .project-photo img,
+.group:focus-visible .project-photo img {
+  filter: grayscale(0) contrast(1) brightness(1);
+  transform: scale(1.02);
+}
+.group:hover .project-photo .tint,
+.group:focus-visible .project-photo .tint {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-photo img { transition: none; }
+  .project-photo .tint { transition: none; }
+  .group:hover .project-photo img { transform: none; }
+}

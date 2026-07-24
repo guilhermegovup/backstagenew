@@ -17,7 +17,7 @@ export const Route = createFileRoute("/projetos/$slug")({
     if (!p) return {};
     const title = `${p.name} — Backstage`;
     const description = p.full ? p.full.slice(0, 180) : p.desc;
-    const image = p.cardImage ? `${BASE}${p.cardImage}` : `${BASE}/projetos/hero-arvore.jpg`;
+    const image = p.photo ? `${BASE}${p.photo}` : `${BASE}/projetos/hero-arvore.jpg`;
     return {
       meta: [
         { title },
@@ -45,11 +45,11 @@ function ProjectPage() {
       {/* Capa */}
       <header className="relative flex min-h-[70vh] items-end overflow-hidden pt-24">
         <div className="absolute inset-0" aria-hidden="true">
-          {p.cardImage ? (
+          {p.photo ? (
             <img
-              src={p.cardImage}
+              src={p.photo}
               alt=""
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-center"
               loading="eager"
             />
           ) : (
@@ -115,13 +115,15 @@ function ProjectPage() {
                 </p>
               )}
 
-              {p.extraImage ? (
-                <figure className="mt-10 overflow-hidden rounded-2xl border border-border">
+              {p.photo ? (
+                <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-night-blue">
                   <img
-                    src={p.extraImage}
-                    alt={p.extraAlt ?? p.name}
+                    src={p.photo}
+                    alt={p.cardAlt ?? p.name}
+                    width={p.photoW}
+                    height={p.photoH}
                     loading="lazy"
-                    className="h-full w-full object-cover"
+                    className="h-auto w-full"
                   />
                 </figure>
               ) : null}

@@ -10,6 +10,9 @@ export type Project = {
   imageAlt?: string;
   cardImage?: string;
   cardAlt?: string;
+  photo?: string;
+  photoW?: number;
+  photoH?: number;
   extraImage?: string;
   extraAlt?: string;
   full?: string;
@@ -18,6 +21,9 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     name: "Árvore do Rio",
+    photo: "/projetos/fotos/arvore.webp",
+    photoW: 1212,
+    photoH: 909,
     slug: "arvore-do-rio",
     meta: "Natal · Desde 1996 / Lagoa Rodrigo de Freitas",
     tagline: "O Natal que flutua no coração da cidade.",
@@ -32,6 +38,9 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Corrida Todo Mundo Vai",
+    photo: "/projetos/fotos/corrida.webp",
+    photoW: 872,
+    photoH: 870,
     slug: "corrida-todo-mundo-vai",
     meta: "Esporte · Desde 2019 / Aterro do Flamengo",
     tagline: "A atividade física mais democrática que existe.",
@@ -44,6 +53,9 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Disney Millenium",
+    photo: "/projetos/fotos/disney.webp",
+    photoW: 595,
+    photoH: 870,
     slug: "disney-millenium",
     meta: "Entretenimento · 2000 / Baía de Guanabara",
     tagline: "Quando o Mickey escolheu o Rio.",
@@ -56,6 +68,9 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Ação Vote Cristo",
+    photo: "/projetos/fotos/cristo.webp",
+    photoW: 996,
+    photoH: 684,
     slug: "vote-cristo",
     meta: "Mobilização · 2007 / Rio de Janeiro",
     tagline: "Ele é uma maravilha.",
@@ -70,6 +85,9 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Festival Vale do Café",
+    photo: "/projetos/fotos/vale.webp",
+    photoW: 824,
+    photoH: 870,
     slug: "festival-vale-do-cafe",
     meta: "Cultura · Desde 2003 / Vale do Paraíba",
     tagline: "Palacetes históricos como palco.",

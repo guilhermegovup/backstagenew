@@ -173,103 +173,86 @@ export function Clientes() {
   );
 }
 
-/* ---------- Mídia de projeto (duotone) ---------- */
-export function ProjectMedia({
-  p,
-  aspectClass,
-  showMetaOnPhoto = false,
-}: {
-  p: Project;
-  aspectClass: string;
-  showMetaOnPhoto?: boolean;
-}) {
-  const card = p.cardImage;
-  return (
-    <div className={`relative ${aspectClass} overflow-hidden rounded-xl bg-night-blue`}>
-      {card ? (
-        <img
-          src={card}
-          alt={p.cardAlt ?? p.name}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out motion-reduce:transition-none group-hover:scale-[1.03]"
-        />
-      ) : (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 flex items-center justify-center px-8 text-center"
-          style={{
-            background:
-              "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
-          }}
+/* ---------- Foto de projeto (proporção nativa, sem corte) ---------- */
+export function ProjectPhoto({ p }: { p: Project }) {
+  if (!p.photo) {
+    return (
+      <div
+        className="flex aspect-[4/3] items-center justify-center rounded-2xl px-8 text-center"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
+        }}
+      >
+        <span
+          className="font-display text-2xl uppercase leading-[0.9] sm:text-4xl"
+          style={{ color: "transparent", WebkitTextStroke: "1px rgba(245,185,66,0.55)" }}
         >
-          <span
-            className="font-display text-3xl uppercase leading-[0.9] sm:text-5xl"
-            style={{
-              color: "transparent",
-              WebkitTextStroke: "1px rgba(245,185,66,0.55)",
-            }}
-          >
-            {p.name}
-          </span>
-        </div>
-      )}
-      {showMetaOnPhoto && card ? (
-        <>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-stage-black via-stage-black/60 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-            <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-spotlight">
-              {p.meta}
-            </p>
-            <h3 className="font-display text-3xl uppercase leading-[0.95] text-warm-white sm:text-5xl">
-              {p.name}
-            </h3>
-          </div>
-        </>
-      ) : null}
+          {p.name}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <div className="project-photo relative overflow-hidden rounded-2xl bg-night-blue">
+      <img
+        src={p.photo}
+        alt={p.cardAlt ?? p.name}
+        width={p.photoW}
+        height={p.photoH}
+        loading="lazy"
+        className="h-auto w-full"
+      />
+      <span className="tint pointer-events-none absolute inset-0" aria-hidden="true" />
     </div>
   );
 }
 
-/* ---------- Card de projeto (link para a página do case) ---------- */
-export function ProjectCard({ p }: { p: Project }) {
+/* ---------- Linha editorial de projeto ---------- */
+export function ProjectRow({ p, index }: { p: Project; index: number }) {
+  const flip = index % 2 === 1;
   return (
-    <article className="group flex flex-col">
+    <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
       <Link
         to="/projetos/$slug"
         params={{ slug: p.slug }}
-        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-spotlight focus-visible:ring-offset-2 focus-visible:ring-offset-stage-black"
         aria-label={`Ver o case ${p.name}`}
+        className={`group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-spotlight lg:col-span-7 ${
+          flip ? "lg:order-2 lg:col-start-6" : ""
+        }`}
       >
-        <ProjectMedia p={p} aspectClass="aspect-[4/5]" />
-        <div className="mt-5 flex flex-col gap-3">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
-            {p.meta}
-          </p>
-          <h3 className="font-display text-xl uppercase leading-[0.95] text-warm-white transition group-hover:text-spotlight sm:text-2xl">
-            {p.name}
-          </h3>
-          <p className="font-display text-base italic text-warm-white sm:text-lg">
-            “{p.tagline}”
-          </p>
-          <p className="text-sm leading-relaxed text-mist">{p.desc}</p>
-          <span className="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-spotlight">
-            Ver o case
-            <ArrowRight size={16} className="transition group-hover:translate-x-1" />
-          </span>
-        </div>
+        <ProjectPhoto p={p} />
       </Link>
+
+      <div className={`lg:col-span-5 ${flip ? "lg:order-1 lg:col-start-1 lg:row-start-1" : ""}`}>
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+          {p.meta}
+        </p>
+        <h3 className="mt-4 font-display text-3xl uppercase leading-[0.95] text-warm-white sm:text-4xl">
+          {p.name}
+        </h3>
+        <p className="mt-4 font-display text-lg italic text-warm-white sm:text-xl">
+          “{p.tagline}”
+        </p>
+        <p className="mt-4 text-sm leading-relaxed text-mist sm:text-base">{p.desc}</p>
+        <Link
+          to="/projetos/$slug"
+          params={{ slug: p.slug }}
+          className="group/link mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-spotlight"
+        >
+          Ver o case
+          <ArrowRight size={16} className="transition group-hover/link:translate-x-1" />
+        </Link>
+      </div>
     </article>
   );
 }
 
-/* ---------- Grade de projetos ---------- */
-export function ProjectGrid() {
+export function ProjectRows() {
   return (
-    <div className="stagger grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="flex flex-col gap-20 sm:gap-28">
       {PROJECTS.map((p, i) => (
-        <div key={p.slug} style={{ ["--i" as string]: `${i}` } as React.CSSProperties}>
-          <ProjectCard p={p} />
-        </div>
+        <ProjectRow key={p.slug} p={p} index={i} />
       ))}
     </div>
   );
