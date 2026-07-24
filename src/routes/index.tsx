@@ -549,27 +549,12 @@ function ProjectCard({ p }: { p: Project }) {
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition duration-500 hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_30px_80px_-30px_rgba(245,185,66,0.45)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-night-blue">
         {card ? (
-          <>
-            <img
-              src={card}
-              alt={p.cardAlt ?? p.name}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-[filter,transform] duration-500 ease-out motion-reduce:transition-none group-hover:scale-[1.04] group-hover:[filter:grayscale(0)_contrast(1)_brightness(1)] group-focus-within:[filter:grayscale(0)_contrast(1)_brightness(1)]"
-              style={{ filter: "grayscale(0.85) contrast(1.05) brightness(0.9)" }}
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-night-blue opacity-100 transition-opacity duration-500 [mix-blend-mode:color] motion-reduce:transition-none group-hover:opacity-0 group-focus-within:opacity-0"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 [mix-blend-mode:soft-light]"
-              style={{
-                background:
-                  "radial-gradient(80% 55% at 50% 0%, rgba(245,185,66,0.12), transparent 70%)",
-              }}
-            />
-          </>
+          <img
+            src={card}
+            alt={p.cardAlt ?? p.name}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 ease-out motion-reduce:transition-none group-hover:scale-[1.04]"
+          />
         ) : (
           <div
             aria-hidden="true"
@@ -587,7 +572,8 @@ function ProjectCard({ p }: { p: Project }) {
           </div>
         )}
 
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-stage-black via-stage-black/55 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-stage-black via-stage-black/70 to-transparent" />
+
 
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
           <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight transition duration-500 group-hover:translate-x-1">
