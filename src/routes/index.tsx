@@ -91,7 +91,7 @@ const PROJECTS: Project[] = [
     desc: "Circuito de corridas de rua que movimenta o Rio.",
     image: "/projetos/corrida-todo-mundo-vai.png",
     imageAlt: "Logo do Circuito Todo Mundo Vai",
-    cardImage: "/projetos/cards/card-corrida.webp",
+    cardImage: undefined,
     cardAlt: "Corredores no Aterro do Flamengo",
     full: "Com o objetivo de trazer de volta os verdadeiros corredores de rua — a atividade física mais democrática que existe, exigindo apenas vontade e um tênis no pé — foi criado o Circuito Todo Mundo Vai, para Lojas Americanas e Americanas.com. Com idealização e produção executiva da Backstage, o evento levou cerca de 6 mil pessoas ao Aterro do Flamengo numa manhã de maio de 2019. Voltado para toda a família e todas as classes sociais, já são 13 provas realizadas em 7 cidades — um evento seguro, bem organizado e de extrema qualidade, a um preço acessível.",
   },
@@ -102,7 +102,7 @@ const PROJECTS: Project[] = [
     desc: "Uma visita do Mickey Mouse à Baía de Guanabara.",
     image: "/projetos/disney-millenium.png",
     imageAlt: "Logo Disney Millenium",
-    cardImage: "/projetos/cards/card-disney.webp",
+    cardImage: undefined,
     cardAlt: "Projeção do Mickey e bandeira brasileira no Pão de Açúcar",
     full: "Para a virada do milênio, a Disney criou um espetáculo grandioso e escolheu o Rio de Janeiro. A Backstage, empresa de eventos da Disney Events Latin America desde 1998, foi selecionada para a operação. No Pão de Açúcar, projeções em dimensões estratosféricas destacaram o Mickey e a bandeira brasileira; na Baía de Guanabara, fogos armados em balsas criaram um espetáculo de luzes, som, música e canhões de laser — pela primeira vez no Brasil, tudo sincronizado por computadores. A logística incluiu até o fechamento do aeroporto Santos Dumont. A Backstage recebeu o Troféu Mickey, dedicado a projetos de excelência — única produtora no Brasil a possuir um exemplar. Depois vieram a inauguração do Disney Channel (2001), shows da Disney na Super Casas Bahia (2005-2007), Shows do Mickey (2015 e 2017) e o lançamento do avião Star Wars Galaxy's Edge da Latam (2019).",
   },
@@ -113,7 +113,7 @@ const PROJECTS: Project[] = [
     desc: "Mobilização que ajudou a eleger o Cristo Redentor uma das 7 Maravilhas do Mundo Moderno.",
     image: "/projetos/vote-cristo.png",
     imageAlt: "Logo da ação Vote Cristo",
-    cardImage: "/projetos/cards/card-cristo.webp",
+    cardImage: "/projetos/vote-cristo-foto.jpg",
     cardAlt: "Cristo Redentor sob céu azul",
     extraImage: "/projetos/vote-cristo-foto.jpg",
     extraAlt: "Ação de rua da campanha Vote Cristo",
@@ -126,7 +126,7 @@ const PROJECTS: Project[] = [
     desc: "Festival cultural na região do Vale do Café fluminense.",
     image: "/projetos/vale-do-cafe.png",
     imageAlt: "Logo do Festival Vale do Café",
-    cardImage: "/projetos/cards/card-vale.webp",
+    cardImage: "/projetos/vale-do-cafe-foto.jpg",
     cardAlt: "Apresentação musical do Festival Vale do Café",
     extraImage: "/projetos/vale-do-cafe-foto.jpg",
     extraAlt: "Apresentação musical do Festival Vale do Café",
@@ -541,107 +541,233 @@ function ComoFazemos() {
 }
 
 /* ---------- Projetos ---------- */
-function ProjectCard({ p }: { p: Project }) {
-  const [open, setOpen] = useState(false);
+function ProjectMedia({
+  p,
+  aspectClass,
+  showMetaOnPhoto = false,
+}: {
+  p: Project;
+  aspectClass: string;
+  showMetaOnPhoto?: boolean;
+}) {
   const card = p.cardImage;
-
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition duration-500 hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_30px_80px_-30px_rgba(245,185,66,0.45)]">
-      <div className="relative aspect-[4/3] overflow-hidden bg-night-blue">
-        {card ? (
-          <img
-            src={card}
-            alt={p.cardAlt ?? p.name}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 ease-out motion-reduce:transition-none group-hover:scale-[1.04]"
-          />
-        ) : (
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center bg-night-blue px-6 text-center"
+    <div className={`relative ${aspectClass} overflow-hidden rounded-xl bg-night-blue`}>
+      {card ? (
+        <img
+          src={card}
+          alt={p.cardAlt ?? p.name}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out motion-reduce:transition-none group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center justify-center px-8 text-center"
+          style={{
+            background:
+              "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
+          }}
+        >
+          <span
+            className="font-display text-3xl uppercase leading-[0.9] sm:text-5xl"
+            style={{
+              color: "transparent",
+              WebkitTextStroke: "1px rgba(245,185,66,0.55)",
+            }}
           >
-            <span
-              className="font-display text-3xl uppercase leading-[0.9] sm:text-4xl"
-              style={{
-                color: "transparent",
-                WebkitTextStroke: "1px rgba(245,185,66,0.4)",
-              }}
-            >
+            {p.name}
+          </span>
+        </div>
+      )}
+      {showMetaOnPhoto && card ? (
+        <>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-stage-black via-stage-black/60 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-spotlight">
+              {p.meta}
+            </p>
+            <h3 className="font-display text-3xl uppercase leading-[0.95] text-warm-white sm:text-5xl">
               {p.name}
-            </span>
+            </h3>
           </div>
-        )}
+        </>
+      ) : null}
+    </div>
+  );
+}
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-stage-black via-stage-black/70 to-transparent" />
-
-
-        <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-          <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight transition duration-500 group-hover:translate-x-1">
+function ProjectCaption({
+  p,
+  featured = false,
+}: {
+  p: Project;
+  featured?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`flex flex-col gap-3 ${featured ? "mt-6" : "mt-5"}`}>
+      {!featured && (
+        <>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
             {p.meta}
           </p>
           <h3 className="font-display text-xl uppercase leading-[0.95] text-warm-white sm:text-2xl">
             {p.name}
           </h3>
+        </>
+      )}
+      <p className="font-display text-base italic text-warm-white sm:text-lg">
+        “{p.tagline}”
+      </p>
+      <p className="text-sm leading-relaxed text-mist">{p.desc}</p>
+      {p.full ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              className="group/btn mt-1 inline-flex items-center gap-2 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
+            >
+              Saiba mais
+              <ArrowRight size={16} className="transition group-hover/btn:translate-x-1" />
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-night-blue p-0 text-warm-white">
+            <div className="relative aspect-[16/9] overflow-hidden bg-stage-black">
+              {p.cardImage || p.extraImage ? (
+                <img
+                  src={p.cardImage ?? p.extraImage}
+                  alt={p.cardAlt ?? p.name}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div
+                  className="h-full w-full"
+                  style={{
+                    background:
+                      "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
+                  }}
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-night-blue via-night-blue/40 to-transparent" />
+            </div>
+            <div className="space-y-4 p-6 sm:p-8">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+                {p.meta}
+              </p>
+              <DialogHeader>
+                <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-4xl">
+                  {p.name}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Case completo do projeto {p.name}
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-sm leading-relaxed text-mist sm:text-base">{p.full}</p>
+            </div>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <span className="mt-1 inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.2em] text-mist">
+          Em breve
+        </span>
+      )}
+    </div>
+  );
+}
+
+function FeaturedProjectCard({ p }: { p: Project }) {
+  return (
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue p-4 transition duration-500 hover:border-spotlight/60 hover:shadow-[0_40px_100px_-40px_rgba(245,185,66,0.45)] sm:p-6">
+      <ProjectMedia p={p} aspectClass="aspect-[16/10]" showMetaOnPhoto />
+      <div className="grid gap-6 px-2 pt-6 sm:grid-cols-[1fr_1.2fr] sm:gap-10 sm:px-4 sm:pt-8">
+        <div>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-spotlight sm:hidden">
+            {p.meta}
+          </p>
+          <h3 className="mt-3 font-display text-2xl uppercase leading-[0.95] text-warm-white sm:hidden">
+            {p.name}
+          </h3>
+          <p className="font-display text-lg italic text-warm-white sm:text-2xl">
+            “{p.tagline}”
+          </p>
         </div>
-      </div>
-
-
-      <div className="flex flex-col gap-3 border-t border-warm-white/5 p-5 sm:p-6">
-        <p className="font-display text-base italic text-warm-white sm:text-lg">
-          “{p.tagline}”
-        </p>
-        <p className="text-sm leading-relaxed text-mist">{p.desc}</p>
-        {p.full ? (
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <button
-                type="button"
-                className="group/btn mt-1 inline-flex items-center gap-2 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
-              >
-                Saiba mais
-                <ArrowRight size={16} className="transition group-hover/btn:translate-x-1" />
-              </button>
-            </DialogTrigger>
-            <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-night-blue p-0 text-warm-white">
-              <div className="relative aspect-[16/9] overflow-hidden bg-stage-black">
-                {card ? (
-                  <img src={card} alt={p.cardAlt ?? p.name} className="h-full w-full object-cover" />
-                ) : (
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background:
-                        "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
-                    }}
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-night-blue via-night-blue/40 to-transparent" />
-              </div>
-              <div className="space-y-4 p-6 sm:p-8">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-spotlight">
-                  {p.meta}
-                </p>
-                <DialogHeader>
-                  <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-4xl">
-                    {p.name}
-                  </DialogTitle>
-                  <DialogDescription className="sr-only">
-                    Case completo do projeto {p.name}
-                  </DialogDescription>
-                </DialogHeader>
-                <p className="text-sm leading-relaxed text-mist sm:text-base">{p.full}</p>
-              </div>
-            </DialogContent>
-          </Dialog>
-        ) : (
-          <span className="mt-1 inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.2em] text-mist">
-            Em breve
-          </span>
-        )}
+        <div className="flex flex-col gap-4">
+          <p className="text-sm leading-relaxed text-mist sm:text-base">{p.desc}</p>
+          <ProjectCaptionButton p={p} />
+        </div>
       </div>
     </article>
   );
 }
+
+function ProjectCaptionButton({ p }: { p: Project }) {
+  const [open, setOpen] = useState(false);
+  if (!p.full) {
+    return (
+      <span className="mt-1 inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.2em] text-mist">
+        Em breve
+      </span>
+    );
+  }
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <button
+          type="button"
+          className="group/btn mt-1 inline-flex items-center gap-2 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
+        >
+          Ler o case completo
+          <ArrowRight size={16} className="transition group-hover/btn:translate-x-1" />
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-night-blue p-0 text-warm-white">
+        <div className="relative aspect-[16/9] overflow-hidden bg-stage-black">
+          {p.cardImage || p.extraImage ? (
+            <img
+              src={p.cardImage ?? p.extraImage}
+              alt={p.cardAlt ?? p.name}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div
+              className="h-full w-full"
+              style={{
+                background:
+                  "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-night-blue via-night-blue/40 to-transparent" />
+        </div>
+        <div className="space-y-4 p-6 sm:p-8">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+            {p.meta}
+          </p>
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-4xl">
+              {p.name}
+            </DialogTitle>
+            <DialogDescription className="sr-only">
+              Case completo do projeto {p.name}
+            </DialogDescription>
+          </DialogHeader>
+          <p className="text-sm leading-relaxed text-mist sm:text-base">{p.full}</p>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function ProjectCard({ p }: { p: Project }) {
+  return (
+    <article className="group flex flex-col">
+      <ProjectMedia p={p} aspectClass="aspect-[4/5]" />
+      <ProjectCaption p={p} />
+    </article>
+  );
+}
+
 
 function Projetos() {
   const ref = useScrollReveal();
@@ -662,13 +788,21 @@ function Projetos() {
           </p>
         </div>
 
-        <div className="stagger mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((p, i) => (
+        {PROJECTS.length > 0 ? (
+          <div className="mt-12">
+            <FeaturedProjectCard p={PROJECTS[0]} />
+          </div>
+        ) : null}
+
+
+        <div className="stagger mt-10 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {PROJECTS.slice(1).map((p, i) => (
             <div key={p.name} style={{ ["--i" as string]: `${i}` } as React.CSSProperties}>
               <ProjectCard p={p} />
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
