@@ -332,26 +332,3 @@
   .stagger > * { opacity: 1; transform: none; transition: none; }
 }
 
-
-/* === HERO v2 — índice de projetos (estilo agência europeia) === */
-.hero-line {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.hero-line.is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-.hero-kenburns {
-  animation: hero-kenburns 9s ease-out both;
-}
-@keyframes hero-kenburns {
-  from { transform: scale(1); }
-  to { transform: scale(1.06); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-line { opacity: 1; transform: none; transition: none; }
-  .hero-kenburns { animation: none; }
-}
