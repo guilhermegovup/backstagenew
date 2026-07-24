@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Menu,
   X,
@@ -1063,11 +1064,22 @@ function Contato() {
       return;
     }
     setErrors({});
+    const form = e.currentTarget;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 600));
+    const { error } = await supabase.from("leads").insert({
+      first_name: parsed.data.firstName,
+      last_name: parsed.data.lastName || null,
+      email: parsed.data.email,
+      phone: parsed.data.phone || null,
+      message: parsed.data.message || null,
+    });
     setSubmitting(false);
+    if (error) {
+      toast.error("Não foi possível enviar. Tente novamente ou fale conosco pelo WhatsApp.");
+      return;
+    }
     toast.success("Mensagem enviada! Retornaremos em breve.");
-    (e.currentTarget as HTMLFormElement).reset();
+    form.reset();
   };
 
   return (
