@@ -543,47 +543,51 @@ function ComoFazemos() {
 /* ---------- Projetos ---------- */
 function ProjectCard({ p }: { p: Project }) {
   const [open, setOpen] = useState(false);
-  const photo = p.extraImage;
-  const logo = p.image;
+  const card = p.cardImage;
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition duration-500 hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_30px_80px_-30px_rgba(245,185,66,0.45)]">
-      <div className="relative aspect-[4/5] overflow-hidden">
-        {photo ? (
-          <img
-            src={photo}
-            alt={p.extraAlt ?? p.name}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition duration-[900ms] ease-out group-hover:scale-[1.06]"
-          />
+      <div className="relative aspect-[4/3] overflow-hidden bg-night-blue">
+        {card ? (
+          <>
+            <img
+              src={card}
+              alt={p.cardAlt ?? p.name}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-[filter,transform] duration-500 ease-out motion-reduce:transition-none group-hover:scale-[1.04] group-hover:[filter:grayscale(0)_contrast(1)_brightness(1)] group-focus-within:[filter:grayscale(0)_contrast(1)_brightness(1)]"
+              style={{ filter: "grayscale(0.85) contrast(1.05) brightness(0.9)" }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-night-blue opacity-100 transition-opacity duration-500 [mix-blend-mode:color] motion-reduce:transition-none group-hover:opacity-0 group-focus-within:opacity-0"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 [mix-blend-mode:soft-light]"
+              style={{
+                background:
+                  "radial-gradient(80% 55% at 50% 0%, rgba(245,185,66,0.12), transparent 70%)",
+              }}
+            />
+          </>
         ) : (
           <div
             aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
-            }}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-stage-black via-stage-black/55 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-br from-stage-black/40 via-transparent to-transparent" />
-
-        <div className="pointer-events-none absolute -inset-1 opacity-0 transition duration-500 group-hover:opacity-100">
-          <div className="absolute -top-16 left-1/2 h-40 w-[70%] -translate-x-1/2 rounded-full bg-spotlight/25 blur-3xl" />
-        </div>
-
-        {logo && (
-          <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-warm-white/15 bg-stage-black/60 px-2.5 py-1.5 backdrop-blur-md">
-            <img
-              src={logo}
-              alt=""
-              aria-hidden="true"
-              className="h-6 w-auto opacity-90"
-              loading="lazy"
-            />
+            className="absolute inset-0 flex items-center justify-center bg-night-blue px-6 text-center"
+          >
+            <span
+              className="font-display text-3xl uppercase leading-[0.9] sm:text-4xl"
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "1px rgba(245,185,66,0.4)",
+              }}
+            >
+              {p.name}
+            </span>
           </div>
         )}
+
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-stage-black via-stage-black/55 to-transparent" />
 
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
           <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight transition duration-500 group-hover:translate-x-1">
@@ -594,6 +598,7 @@ function ProjectCard({ p }: { p: Project }) {
           </h3>
         </div>
       </div>
+
 
       <div className="flex flex-col gap-3 border-t border-warm-white/5 p-5 sm:p-6">
         <p className="font-display text-base italic text-warm-white sm:text-lg">
