@@ -358,3 +358,6 @@
   .project-photo .tint { transition: none; }
   .group:hover .project-photo img { transform: none; }
 }
+
+/* Defesa contra estouro horizontal (clip não quebra sticky/fixed como hidden) */
+html, body { overflow-x: clip; }
