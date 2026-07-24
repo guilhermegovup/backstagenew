@@ -343,79 +343,135 @@ function ComoFazemos() {
 }
 
 /* ---------- Projetos ---------- */
-function ProjectCard({ p }: { p: Project }) {
+function ProjectCard({ p, featured = false }: { p: Project; featured?: boolean }) {
   const [open, setOpen] = useState(false);
-  const hasImage = !!p.image;
-
-  const media = hasImage ? (
-    <div className="relative aspect-[4/3] overflow-hidden bg-warm-white">
-      <img
-        src={p.image}
-        alt={p.imageAlt ?? p.name}
-        loading="lazy"
-        className="h-full w-full object-contain p-8 transition duration-500 group-hover:scale-[1.03]"
-      />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-stage-black/70 to-transparent" />
-    </div>
-  ) : (
-    <div
-      aria-hidden="true"
-      className="relative flex aspect-[4/3] items-center justify-center overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #131C33 0%, #0B0B10 60%, #1A2340 100%)",
-      }}
-    >
-      <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_20%_20%,rgba(245,185,66,0.35),transparent_40%)]" />
-      <span className="relative px-6 text-center font-display text-2xl uppercase tracking-tight text-warm-white sm:text-3xl">
-        {p.name}
-      </span>
-    </div>
-  );
+  const photo = p.extraImage;
+  const logo = p.image;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_20px_60px_-20px_rgba(245,185,66,0.35)]">
-      {media}
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-display text-lg text-warm-white">{p.name}</h3>
-        <p className="mt-2 flex-1 text-sm text-mist">{p.desc}</p>
-        {p.full && (
+    <article
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition duration-500 hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_30px_80px_-30px_rgba(245,185,66,0.45)] ${
+        featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
+      }`}
+    >
+      <div
+        className={`relative overflow-hidden ${
+          featured ? "aspect-[16/11] lg:aspect-auto lg:flex-1" : "aspect-[4/5]"
+        }`}
+      >
+        {photo ? (
+          <img
+            src={photo}
+            alt={p.extraAlt ?? p.name}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition duration-[900ms] ease-out group-hover:scale-[1.06]"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
+            }}
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-stage-black via-stage-black/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-stage-black/40 via-transparent to-transparent" />
+
+        <div className="pointer-events-none absolute -inset-1 opacity-0 transition duration-500 group-hover:opacity-100">
+          <div className="absolute -top-16 left-1/2 h-40 w-[70%] -translate-x-1/2 rounded-full bg-spotlight/25 blur-3xl" />
+        </div>
+
+        {logo && (
+          <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-warm-white/15 bg-stage-black/60 px-2.5 py-1.5 backdrop-blur-md">
+            <img
+              src={logo}
+              alt=""
+              aria-hidden="true"
+              className="h-6 w-auto opacity-90"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+            Case Backstage
+          </p>
+          <h3
+            className={`font-display uppercase leading-[0.95] text-warm-white ${
+              featured ? "text-3xl sm:text-5xl" : "text-xl sm:text-2xl"
+            }`}
+          >
+            {p.name}
+          </h3>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4 border-t border-warm-white/5 p-5 sm:p-6">
+        <p className="text-sm leading-relaxed text-mist">{p.desc}</p>
+        {p.full ? (
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
+                className="group/btn inline-flex items-center gap-2 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
               >
                 Saiba mais
-                <ArrowRight size={16} />
+                <ArrowRight
+                  size={16}
+                  className="transition group-hover/btn:translate-x-1"
+                />
               </button>
             </DialogTrigger>
-            <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto border-border bg-night-blue text-warm-white">
-              {p.image && (
-                <img
-                  src={p.image}
-                  alt={p.imageAlt ?? p.name}
-                  className="mx-auto max-h-56 w-full rounded-lg bg-warm-white object-contain p-6"
-                />
-              )}
-              <DialogHeader>
-                <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-3xl">
-                  {p.name}
-                </DialogTitle>
-                <DialogDescription className="sr-only">
-                  Case completo do projeto {p.name}
-                </DialogDescription>
-              </DialogHeader>
-              <p className="text-sm leading-relaxed text-mist sm:text-base">{p.full}</p>
-              {p.extraImage && (
-                <img
-                  src={p.extraImage}
-                  alt={p.extraAlt ?? p.name}
-                  loading="lazy"
-                  className="w-full rounded-lg object-cover"
-                />
-              )}
+            <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-night-blue p-0 text-warm-white">
+              <div className="relative aspect-[16/9] overflow-hidden bg-stage-black">
+                {photo ? (
+                  <img
+                    src={photo}
+                    alt={p.extraAlt ?? p.name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div
+                    className="h-full w-full"
+                    style={{
+                      background:
+                        "radial-gradient(120% 90% at 20% 10%, #1A2340 0%, #131C33 45%, #0B0B10 100%)",
+                    }}
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-night-blue via-night-blue/40 to-transparent" />
+                {logo && (
+                  <img
+                    src={logo}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute bottom-4 left-6 h-14 w-auto"
+                  />
+                )}
+              </div>
+              <div className="space-y-4 p-6 sm:p-8">
+                <DialogHeader>
+                  <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-4xl">
+                    {p.name}
+                  </DialogTitle>
+                  <DialogDescription className="sr-only">
+                    Case completo do projeto {p.name}
+                  </DialogDescription>
+                </DialogHeader>
+                <p className="text-sm leading-relaxed text-mist sm:text-base">
+                  {p.full}
+                </p>
+              </div>
             </DialogContent>
           </Dialog>
+        ) : (
+          <span className="inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.2em] text-mist">
+            Em breve
+          </span>
         )}
       </div>
     </article>
@@ -427,7 +483,7 @@ function Projetos() {
   return (
     <section id="projetos" ref={ref} className="on-scroll border-t border-border py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex items-end justify-between gap-6">
+        <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
               Portfólio
@@ -436,11 +492,14 @@ function Projetos() {
               Alguns de nossos projetos
             </h2>
           </div>
+          <p className="max-w-sm text-sm text-mist">
+            Uma seleção de realizações que atravessaram gerações — do palco ao asfalto, da baía ao interior.
+          </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((p) => (
-            <ProjectCard key={p.name} p={p} />
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {PROJECTS.map((p, i) => (
+            <ProjectCard key={p.name} p={p} featured={i === 0} />
           ))}
         </div>
       </div>
