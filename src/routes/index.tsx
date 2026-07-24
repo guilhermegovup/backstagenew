@@ -16,6 +16,14 @@ import {
   Instagram,
   Facebook,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,6 +40,8 @@ export const Route = createFileRoute("/")({
         content:
           "Produtora carioca especializada em grandes eventos: da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara.",
       },
+      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio.png" },
+      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio.png" },
     ],
   }),
   component: Home,
@@ -44,13 +54,62 @@ const NAV = [
   { label: "Clientes", href: "#clientes" },
 ];
 
-const PROJECTS = [
-  { name: "Árvore do Rio", desc: "A maior árvore de natal flutuante do mundo, na Lagoa Rodrigo de Freitas." },
-  { name: "Corrida Todo Mundo Vai", desc: "Circuito de corridas de rua que movimenta o Rio." },
-  { name: "Disney Millenium", desc: "Uma visita do Mickey Mouse à Baía de Guanabara." },
-  { name: "Ação Vote Cristo", desc: "Mobilização que ajudou a eleger o Cristo Redentor uma das 7 Maravilhas do Mundo Moderno." },
-  { name: "Festival Vale do Café", desc: "Festival cultural na região do Vale do Café fluminense." },
-  { name: "Circuito Energia em Movimento", desc: "Circuito de eventos esportivos e de qualidade de vida." },
+type Project = {
+  name: string;
+  desc: string;
+  image?: string;
+  imageAlt?: string;
+  extraImage?: string;
+  extraAlt?: string;
+  full?: string;
+};
+
+const PROJECTS: Project[] = [
+  {
+    name: "Árvore do Rio",
+    desc: "A maior árvore de natal flutuante do mundo, na Lagoa Rodrigo de Freitas.",
+    image: "/projetos/arvore-do-rio.png",
+    imageAlt: "Logo da Árvore do Rio",
+    extraImage: "/projetos/arvore-do-rio-foto.png",
+    extraAlt: "Árvore de Natal flutuante iluminada na Lagoa Rodrigo de Freitas",
+    full: "Uma produção mágica, que enche a gente de prazer e orgulho. Uma realização Backstage que, desde 1996, ajuda a fazer da Lagoa Rodrigo de Freitas uma referência do Natal brasileiro. Considerado o 3º maior evento do Rio de Janeiro (atrás apenas do Carnaval e do Réveillon), a Árvore do Rio já celebra 21 edições e se realiza graças à participação de 1200 profissionais, atraindo todos os anos mais de 1 milhão de pessoas para o entorno da Lagoa. A Árvore do Rio foi incluída no Guinness Book (1999 e 2007) como a maior árvore flutuante do mundo. Uma produção que envolve da parte artística ao mais alto grau de especialização em diversos campos da engenharia, inclusive naval — viabilizando a ideia de Roberto Medina com a concepção cenográfica de Abel Gomes.",
+  },
+  {
+    name: "Corrida Todo Mundo Vai",
+    desc: "Circuito de corridas de rua que movimenta o Rio.",
+    image: "/projetos/corrida-todo-mundo-vai.png",
+    imageAlt: "Logo do Circuito Todo Mundo Vai",
+    full: "Com o objetivo de trazer de volta os verdadeiros corredores de rua — a atividade física mais democrática que existe, exigindo apenas vontade e um tênis no pé — foi criado o Circuito Todo Mundo Vai, para Lojas Americanas e Americanas.com. Com idealização e produção executiva da Backstage, o evento levou cerca de 6 mil pessoas ao Aterro do Flamengo numa manhã de maio de 2019. Voltado para toda a família e todas as classes sociais, já são 13 provas realizadas em 7 cidades — um evento seguro, bem organizado e de extrema qualidade, a um preço acessível.",
+  },
+  {
+    name: "Disney Millenium",
+    desc: "Uma visita do Mickey Mouse à Baía de Guanabara.",
+    image: "/projetos/disney-millenium.png",
+    imageAlt: "Logo Disney Millenium",
+    full: "Para a virada do milênio, a Disney criou um espetáculo grandioso e escolheu o Rio de Janeiro. A Backstage, empresa de eventos da Disney Events Latin America desde 1998, foi selecionada para a operação. No Pão de Açúcar, projeções em dimensões estratosféricas destacaram o Mickey e a bandeira brasileira; na Baía de Guanabara, fogos armados em balsas criaram um espetáculo de luzes, som, música e canhões de laser — pela primeira vez no Brasil, tudo sincronizado por computadores. A logística incluiu até o fechamento do aeroporto Santos Dumont. A Backstage recebeu o Troféu Mickey, dedicado a projetos de excelência — única produtora no Brasil a possuir um exemplar. Depois vieram a inauguração do Disney Channel (2001), shows da Disney na Super Casas Bahia (2005-2007), Shows do Mickey (2015 e 2017) e o lançamento do avião Star Wars Galaxy's Edge da Latam (2019).",
+  },
+  {
+    name: "Ação Vote Cristo",
+    desc: "Mobilização que ajudou a eleger o Cristo Redentor uma das 7 Maravilhas do Mundo Moderno.",
+    image: "/projetos/vote-cristo.png",
+    imageAlt: "Logo da ação Vote Cristo",
+    extraImage: "/projetos/vote-cristo-foto.jpg",
+    extraAlt: "Ação de rua da campanha Vote Cristo",
+    full: "A campanha de eleição do Cristo Redentor como uma das Sete Maravilhas do Mundo Moderno foi um projeto da Bradesco Seguros com produção executiva da Backstage Produções. Com o conceito 'Vote Cristo. Ele é uma maravilha.', a campanha tomou a cidade com vans envelopadas e promotores uniformizados, divulgando o site e o telefone de votação. Lideranças, artistas e celebridades participaram da mobilização nacional. O objetivo foi alcançado: o Cristo Redentor, maior símbolo do Rio de Janeiro, foi eleito uma das Sete Maravilhas do Mundo Moderno.",
+  },
+  {
+    name: "Festival Vale do Café",
+    desc: "Festival cultural na região do Vale do Café fluminense.",
+    image: "/projetos/vale-do-cafe.png",
+    imageAlt: "Logo do Festival Vale do Café",
+    extraImage: "/projetos/vale-do-cafe-foto.jpg",
+    extraAlt: "Apresentação musical do Festival Vale do Café",
+    full: "Criado em 2003 para contribuir com um polo turístico cultural no interior do estado do Rio, o Festival Vale do Café divulga o patrimônio histórico e arquitetônico dos municípios do Vale do Paraíba. Idealizado por Cristina Braga, com direção artística de Turíbio Santos, tem praças, igrejas e fazendas históricas como cenário do maior festival de música da região. Em 2010 recebeu o Prêmio de Cultura do Estado do Rio de Janeiro na categoria Empreendedorismo. Em sua história, já impactou mais de 1 milhão de espectadores, com concertos de 10 mil artistas, e beneficiou mais de 4 mil alunos com cursos gratuitos de instrumentos e canto.",
+  },
+  {
+    name: "Circuito Energia em Movimento",
+    desc: "Circuito de eventos esportivos e de qualidade de vida.",
+  },
 ];
 
 const STEPS = [
@@ -67,7 +126,26 @@ const STATS = [
   { k: "BR", v: "Rio de Janeiro e todo o Brasil" },
 ];
 
-const CLIENTS = Array.from({ length: 12 }, (_, i) => `Logo ${String(i + 1).padStart(2, "0")}`);
+const CLIENTS: { name: string; src: string }[] = [
+  { name: "Petrobras", src: "/clientes/petrobras.svg" },
+  { name: "Enel", src: "/clientes/enel.svg" },
+  { name: "Naturgy", src: "/clientes/naturgy.svg" },
+  { name: "Light", src: "/clientes/light.svg" },
+  { name: "Furnas", src: "/clientes/furnas.svg" },
+  { name: "Transpetro", src: "/clientes/transpetro.svg" },
+  { name: "Sebrae", src: "/clientes/sebrae.svg" },
+  { name: "Sesc", src: "/clientes/sesc.svg" },
+  { name: "Senac", src: "/clientes/senac.svg" },
+  { name: "Fundação Roberto Marinho", src: "/clientes/fundacao-roberto-marinho.svg" },
+  { name: "Grupo CCR", src: "/clientes/grupo-ccr.svg" },
+  { name: "Bradesco Seguros", src: "/clientes/bradesco-seguros.svg" },
+  { name: "Americanas", src: "/clientes/americanas.svg" },
+  { name: "Citroën", src: "/clientes/citroen.svg" },
+  { name: "Land Rover", src: "/clientes/land-rover.svg" },
+  { name: "Mapfre", src: "/clientes/mapfre.svg" },
+  { name: "Cateno", src: "/clientes/cateno.svg" },
+  { name: "Universidade", src: "/clientes/universidade.svg" },
+];
 
 const contactSchema = z.object({
   firstName: z.string().trim().min(1, "Informe seu nome").max(80),
@@ -116,8 +194,14 @@ function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="font-display text-xl tracking-tight text-warm-white">
-          BACKSTAGE
+        <a href="#top" aria-label="Backstage — página inicial" className="flex items-center">
+          <img
+            src="/brand/logo-backstage-branco.svg"
+            alt="Backstage"
+            className="h-8 w-auto"
+            width={140}
+            height={32}
+          />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((n) => (
@@ -259,6 +343,85 @@ function ComoFazemos() {
 }
 
 /* ---------- Projetos ---------- */
+function ProjectCard({ p }: { p: Project }) {
+  const [open, setOpen] = useState(false);
+  const hasImage = !!p.image;
+
+  const media = hasImage ? (
+    <div className="relative aspect-[4/3] overflow-hidden bg-warm-white">
+      <img
+        src={p.image}
+        alt={p.imageAlt ?? p.name}
+        loading="lazy"
+        className="h-full w-full object-contain p-8 transition duration-500 group-hover:scale-[1.03]"
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-stage-black/70 to-transparent" />
+    </div>
+  ) : (
+    <div
+      aria-hidden="true"
+      className="relative flex aspect-[4/3] items-center justify-center overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #131C33 0%, #0B0B10 60%, #1A2340 100%)",
+      }}
+    >
+      <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_20%_20%,rgba(245,185,66,0.35),transparent_40%)]" />
+      <span className="relative px-6 text-center font-display text-2xl uppercase tracking-tight text-warm-white sm:text-3xl">
+        {p.name}
+      </span>
+    </div>
+  );
+
+  return (
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_20px_60px_-20px_rgba(245,185,66,0.35)]">
+      {media}
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="font-display text-lg text-warm-white">{p.name}</h3>
+        <p className="mt-2 flex-1 text-sm text-mist">{p.desc}</p>
+        {p.full && (
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
+              >
+                Saiba mais
+                <ArrowRight size={16} />
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto border-border bg-night-blue text-warm-white">
+              {p.image && (
+                <img
+                  src={p.image}
+                  alt={p.imageAlt ?? p.name}
+                  className="mx-auto max-h-56 w-full rounded-lg bg-warm-white object-contain p-6"
+                />
+              )}
+              <DialogHeader>
+                <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-3xl">
+                  {p.name}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Case completo do projeto {p.name}
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-sm leading-relaxed text-mist sm:text-base">{p.full}</p>
+              {p.extraImage && (
+                <img
+                  src={p.extraImage}
+                  alt={p.extraAlt ?? p.name}
+                  loading="lazy"
+                  className="w-full rounded-lg object-cover"
+                />
+              )}
+            </DialogContent>
+          </Dialog>
+        )}
+      </div>
+    </article>
+  );
+}
+
 function Projetos() {
   const ref = useScrollReveal();
   return (
@@ -277,28 +440,7 @@ function Projetos() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((p) => (
-            <article
-              key={p.name}
-              className="group overflow-hidden rounded-2xl border border-border bg-night-blue transition hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_20px_60px_-20px_rgba(245,185,66,0.35)]"
-            >
-              <div
-                aria-hidden="true"
-                className="relative flex aspect-[4/3] items-center justify-center overflow-hidden"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #131C33 0%, #0B0B10 60%, #1A2340 100%)",
-                }}
-              >
-                <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_20%_20%,rgba(245,185,66,0.35),transparent_40%)]" />
-                <span className="relative px-6 text-center font-display text-2xl uppercase tracking-tight text-warm-white sm:text-3xl">
-                  {p.name}
-                </span>
-              </div>
-              <div className="p-6">
-                <h3 className="font-display text-lg text-warm-white">{p.name}</h3>
-                <p className="mt-2 text-sm text-mist">{p.desc}</p>
-              </div>
-            </article>
+            <ProjectCard key={p.name} p={p} />
           ))}
         </div>
       </div>
@@ -415,12 +557,17 @@ function Clientes() {
       </div>
       <div className="marquee mt-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div className="marquee-track flex w-max gap-6">
-          {doubled.map((name, i) => (
+          {doubled.map((c, i) => (
             <div
-              key={`${name}-${i}`}
-              className="grid h-24 w-48 shrink-0 place-items-center rounded-xl border border-border bg-night-blue/60 text-sm font-semibold uppercase tracking-widest text-mist"
+              key={`${c.name}-${i}`}
+              className="grid h-24 w-48 shrink-0 place-items-center rounded-xl bg-warm-white px-6 py-4"
             >
-              {name}
+              <img
+                src={c.src}
+                alt={c.name}
+                loading="lazy"
+                className="max-h-12 w-full object-contain"
+              />
             </div>
           ))}
         </div>
@@ -569,8 +716,14 @@ function Footer() {
     <footer className="border-t border-border bg-stage-black py-16">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-3">
         <div>
-          <p className="font-display text-2xl text-warm-white">BACKSTAGE</p>
-          <p className="mt-3 text-sm text-mist">Boas ideias. Grandes realizações.</p>
+          <img
+            src="/brand/logo-backstage-branco.svg"
+            alt="Backstage"
+            className="h-10 w-auto"
+            width={180}
+            height={40}
+          />
+          <p className="mt-4 text-sm text-mist">Boas ideias. Grandes realizações.</p>
           <div className="mt-6 flex gap-3">
             <a
               href="https://instagram.com/backstage.rio.producoes"
