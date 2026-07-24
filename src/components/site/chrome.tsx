@@ -186,11 +186,13 @@ function FooterCTA({
     "group flex items-center justify-between gap-4 border-b border-border p-8 transition hover:bg-night-blue/40 md:border-b-0 md:border-r md:last:border-r-0 sm:p-10";
   const inner = (
     <>
-      <div>
+      <div className="min-w-0">
         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
           {kicker}
         </p>
-        <p className="font-display text-2xl uppercase text-warm-white sm:text-3xl">{title}</p>
+        <p className="font-display text-xl uppercase text-warm-white [overflow-wrap:anywhere] sm:text-2xl lg:text-3xl">
+          {title}
+        </p>
       </div>
       <ArrowRight
         size={28}

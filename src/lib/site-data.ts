@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Corrida Todo Mundo Vai",
     photo: "/projetos/fotos/corrida.webp",
-    photoW: 872,
+    photoW: 693,
     photoH: 870,
     slug: "corrida-todo-mundo-vai",
     meta: "Esporte · Desde 2019 / Aterro do Flamengo",
@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Disney Millenium",
     photo: "/projetos/fotos/disney.webp",
-    photoW: 595,
+    photoW: 410,
     photoH: 870,
     slug: "disney-millenium",
     meta: "Entretenimento · 2000 / Baía de Guanabara",
@@ -69,7 +69,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Ação Vote Cristo",
     photo: "/projetos/fotos/cristo.webp",
-    photoW: 996,
+    photoW: 699,
     photoH: 684,
     slug: "vote-cristo",
     meta: "Mobilização · 2007 / Rio de Janeiro",
@@ -86,7 +86,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Festival Vale do Café",
     photo: "/projetos/fotos/vale.webp",
-    photoW: 824,
+    photoW: 647,
     photoH: 870,
     slug: "festival-vale-do-cafe",
     meta: "Cultura · Desde 2003 / Vale do Paraíba",
