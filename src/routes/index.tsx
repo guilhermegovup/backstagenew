@@ -789,10 +789,11 @@ function Projetos() {
         </div>
 
         {PROJECTS.length > 0 ? (
-          <div className="on-scroll mt-12" style={{ ["--i" as string]: "0" } as React.CSSProperties}>
+          <div className="mt-12">
             <FeaturedProjectCard p={PROJECTS[0]} />
           </div>
         ) : null}
+
 
         <div className="stagger mt-10 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.slice(1).map((p, i) => (
