@@ -41,8 +41,8 @@ export const Route = createFileRoute("/")({
         content:
           "Produtora carioca especializada em grandes eventos: da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara.",
       },
-      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio-foto.png" },
-      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio-foto.png" },
+      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
+      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
     ],
   }),
   component: Home,
@@ -369,18 +369,18 @@ function Hero() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           ref={bgRef}
-          className="absolute inset-y-[-10%] right-[-10%] w-[75%] will-change-transform"
+          className="absolute inset-y-[-10%] right-[-10%] w-[80%] will-change-transform"
           aria-hidden="true"
         >
           <img
-            src="/projetos/arvore-do-rio-foto.png"
+            src="/projetos/hero-arvore.jpg"
             alt=""
-            className="h-full w-full object-cover opacity-50"
+            className="h-full w-full object-cover object-[65%_center] opacity-60"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 95%)",
+                "linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)",
               maskImage:
-                "linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 95%)",
+                "linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)",
             }}
           />
         </div>
