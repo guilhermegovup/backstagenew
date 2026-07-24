@@ -788,13 +788,20 @@ function Projetos() {
           </p>
         </div>
 
-        <div className="stagger mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((p, i) => (
+        {PROJECTS.length > 0 ? (
+          <div className="on-scroll mt-12" style={{ ["--i" as string]: "0" } as React.CSSProperties}>
+            <FeaturedProjectCard p={PROJECTS[0]} />
+          </div>
+        ) : null}
+
+        <div className="stagger mt-10 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {PROJECTS.slice(1).map((p, i) => (
             <div key={p.name} style={{ ["--i" as string]: `${i}` } as React.CSSProperties}>
               <ProjectCard p={p} />
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
