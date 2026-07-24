@@ -618,8 +618,8 @@ function ProjectCard({ p }: { p: Project }) {
             </DialogTrigger>
             <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-night-blue p-0 text-warm-white">
               <div className="relative aspect-[16/9] overflow-hidden bg-stage-black">
-                {photo ? (
-                  <img src={photo} alt={p.extraAlt ?? p.name} className="h-full w-full object-cover" />
+                {card ? (
+                  <img src={card} alt={p.cardAlt ?? p.name} className="h-full w-full object-cover" />
                 ) : (
                   <div
                     className="h-full w-full"
@@ -630,9 +630,6 @@ function ProjectCard({ p }: { p: Project }) {
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-night-blue via-night-blue/40 to-transparent" />
-                {logo && (
-                  <img src={logo} alt="" aria-hidden="true" className="absolute bottom-4 left-6 h-14 w-auto" />
-                )}
               </div>
               <div className="space-y-4 p-6 sm:p-8">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-spotlight">
