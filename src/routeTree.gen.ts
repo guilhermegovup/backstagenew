@@ -9,38 +9,98 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as EstudioRouteImport } from './routes/estudio'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProjetosIndexRouteImport } from './routes/projetos/index'
+import { Route as ProjetosSlugRouteImport } from './routes/projetos/$slug'
 
+const EstudioRoute = EstudioRouteImport.update({
+  id: '/estudio',
+  path: '/estudio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjetosIndexRoute = ProjetosIndexRouteImport.update({
+  id: '/projetos/',
+  path: '/projetos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
+  id: '/projetos/$slug',
+  path: '/projetos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/estudio': typeof EstudioRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
+  '/projetos/': typeof ProjetosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/estudio': typeof EstudioRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
+  '/projetos': typeof ProjetosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/estudio': typeof EstudioRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
+  '/projetos/': typeof ProjetosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/contato' | '/estudio' | '/projetos/$slug' | '/projetos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/contato' | '/estudio' | '/projetos/$slug' | '/projetos'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/estudio'
+    | '/projetos/$slug'
+    | '/projetos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContatoRoute: typeof ContatoRoute
+  EstudioRoute: typeof EstudioRoute
+  ProjetosSlugRoute: typeof ProjetosSlugRoute
+  ProjetosIndexRoute: typeof ProjetosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/estudio': {
+      id: '/estudio'
+      path: '/estudio'
+      fullPath: '/estudio'
+      preLoaderRoute: typeof EstudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +108,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projetos/': {
+      id: '/projetos/'
+      path: '/projetos'
+      fullPath: '/projetos/'
+      preLoaderRoute: typeof ProjetosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projetos/$slug': {
+      id: '/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/projetos/$slug'
+      preLoaderRoute: typeof ProjetosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContatoRoute: ContatoRoute,
+  EstudioRoute: EstudioRoute,
+  ProjetosSlugRoute: ProjetosSlugRoute,
+  ProjetosIndexRoute: ProjetosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
