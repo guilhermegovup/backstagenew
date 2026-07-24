@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import {
   Menu,
   X,
   ArrowRight,
+  ArrowDown,
   Lightbulb,
   Ruler,
   Wrench,
@@ -40,8 +41,8 @@ export const Route = createFileRoute("/")({
         content:
           "Produtora carioca especializada em grandes eventos: da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara.",
       },
-      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio.png" },
-      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio.png" },
+      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio-foto.png" },
+      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/arvore-do-rio-foto.png" },
     ],
   }),
   component: Home,
@@ -56,6 +57,8 @@ const NAV = [
 
 type Project = {
   name: string;
+  meta: string;
+  tagline: string;
   desc: string;
   image?: string;
   imageAlt?: string;
@@ -67,6 +70,8 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     name: "Árvore do Rio",
+    meta: "Natal · Desde 1996 / Lagoa Rodrigo de Freitas",
+    tagline: "O Natal que flutua no coração da cidade.",
     desc: "A maior árvore de natal flutuante do mundo, na Lagoa Rodrigo de Freitas.",
     image: "/projetos/arvore-do-rio.png",
     imageAlt: "Logo da Árvore do Rio",
@@ -76,6 +81,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Corrida Todo Mundo Vai",
+    meta: "Esporte · Desde 2019 / Aterro do Flamengo",
+    tagline: "A atividade física mais democrática que existe.",
     desc: "Circuito de corridas de rua que movimenta o Rio.",
     image: "/projetos/corrida-todo-mundo-vai.png",
     imageAlt: "Logo do Circuito Todo Mundo Vai",
@@ -83,6 +90,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Disney Millenium",
+    meta: "Entretenimento · 2000 / Baía de Guanabara",
+    tagline: "Quando o Mickey escolheu o Rio.",
     desc: "Uma visita do Mickey Mouse à Baía de Guanabara.",
     image: "/projetos/disney-millenium.png",
     imageAlt: "Logo Disney Millenium",
@@ -90,6 +99,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Ação Vote Cristo",
+    meta: "Mobilização · 2007 / Rio de Janeiro",
+    tagline: "Ele é uma maravilha.",
     desc: "Mobilização que ajudou a eleger o Cristo Redentor uma das 7 Maravilhas do Mundo Moderno.",
     image: "/projetos/vote-cristo.png",
     imageAlt: "Logo da ação Vote Cristo",
@@ -99,6 +110,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Festival Vale do Café",
+    meta: "Cultura · Desde 2003 / Vale do Paraíba",
+    tagline: "Palacetes históricos como palco.",
     desc: "Festival cultural na região do Vale do Café fluminense.",
     image: "/projetos/vale-do-cafe.png",
     imageAlt: "Logo do Festival Vale do Café",
@@ -108,6 +121,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Circuito Energia em Movimento",
+    meta: "Esporte / Rio de Janeiro",
+    tagline: "Movimento que vira qualidade de vida.",
     desc: "Circuito de eventos esportivos e de qualidade de vida.",
   },
 ];
@@ -119,11 +134,22 @@ const STEPS = [
   { n: "04", title: "Experiência", desc: "O público vive o evento. Nossa métrica de sucesso é a memória que fica.", Icon: Sparkles },
 ];
 
-const STATS = [
-  { k: "~30", v: "anos de história" },
-  { k: "4", v: "frentes: cultural, esportiva, empresarial e entretenimento" },
-  { k: "1", v: "equipe multidisciplinar apaixonada" },
-  { k: "BR", v: "Rio de Janeiro e todo o Brasil" },
+type Stat = { value: number; suffix?: string; prefix?: string; label: string };
+const STATS: Stat[] = [
+  { value: 30, label: "anos de história" },
+  { value: 2, suffix: "×", label: "no Guinness Book (Árvore do Rio, 1999 e 2007)" },
+  { value: 1, suffix: "M+", label: "pessoas por ano na Lagoa" },
+  { value: 1200, label: "profissionais em uma única produção" },
+];
+
+const TIMELINE: { year: string; text: string; cta?: boolean }[] = [
+  { year: "1996", text: "Primeira Árvore do Rio na Lagoa Rodrigo de Freitas." },
+  { year: "1998", text: "Backstage torna-se a produtora da Disney Events Latin America." },
+  { year: "2000", text: "Disney Millenium: Mickey na Baía de Guanabara e o Troféu Mickey." },
+  { year: "2003", text: "Nasce o Festival Vale do Café." },
+  { year: "2007", text: "Vote Cristo: o Cristo eleito uma das 7 Maravilhas do Mundo Moderno." },
+  { year: "2019", text: "Circuito Todo Mundo Vai leva 6 mil pessoas ao Aterro." },
+  { year: "Hoje", text: "Prontos para a próxima grande realização.", cta: true },
 ];
 
 const CLIENTS: { name: string; src: string }[] = [
@@ -157,20 +183,65 @@ const contactSchema = z.object({
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground">
+      <CursorSpotlight />
       <Navbar />
       <main>
         <Hero />
+        <BigMarquee />
         <ComoFazemos />
         <Projetos />
+        <Manifesto />
         <QuemSomos />
+        <Timeline />
         <VideoSection />
         <Clientes />
         <Contato />
       </main>
+      <FooterCTAs />
       <Footer />
+      <div className="film-grain" aria-hidden="true" />
     </div>
   );
+}
+
+/* ---------- Cursor holofote ---------- */
+function CursorSpotlight() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (
+      typeof window === "undefined" ||
+      window.matchMedia("(hover: none), (pointer: coarse)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    let tx = window.innerWidth / 2;
+    let ty = window.innerHeight / 2;
+    let cx = tx;
+    let cy = ty;
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+    };
+    const tick = () => {
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      el.style.setProperty("--mx", `${cx}px`);
+      el.style.setProperty("--my", `${cy}px`);
+      raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    raf = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return <div ref={ref} className="cursor-spot" aria-hidden="true" />;
 }
 
 /* ---------- Navbar ---------- */
@@ -208,14 +279,14 @@ function Navbar() {
             <a
               key={n.href}
               href={n.href}
-              className="text-sm text-warm-white/80 transition hover:text-spotlight"
+              className="nav-link text-sm text-warm-white/80 transition hover:text-warm-white"
             >
               {n.label}
             </a>
           ))}
           <a
             href="#fale-conosco"
-            className="inline-flex min-h-11 items-center rounded-full bg-spotlight px-5 text-sm font-semibold text-stage-black transition hover:brightness-110"
+            className="btn-primary inline-flex min-h-11 items-center rounded-full bg-spotlight px-5 text-sm font-semibold text-stage-black"
           >
             Fale Conosco
           </a>
@@ -259,18 +330,78 @@ function Navbar() {
 
 /* ---------- Hero ---------- */
 function Hero() {
+  const bgRef = useRef<HTMLDivElement | null>(null);
+  const headlineRef = useRef<HTMLHeadingElement | null>(null);
+
+  // parallax
+  useEffect(() => {
+    const el = bgRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const tick = () => {
+      const y = Math.max(-80, Math.min(80, window.scrollY * 0.15));
+      el.style.transform = `translate3d(0, ${y}px, 0)`;
+      raf = 0;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // word reveal on mount
+  useEffect(() => {
+    const el = headlineRef.current;
+    if (!el) return;
+    const t = window.setTimeout(() => el.classList.add("word-revealed"), 250);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <section id="top" className="relative overflow-hidden pt-24">
-      <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-10%,rgba(19,28,51,0.9),transparent_60%)]" />
+      {/* background photo layer */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          ref={bgRef}
+          className="absolute inset-y-[-10%] right-[-10%] w-[75%] will-change-transform"
+          aria-hidden="true"
+        >
+          <img
+            src="/projetos/arvore-do-rio-foto.png"
+            alt=""
+            className="h-full w-full object-cover opacity-50"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 95%)",
+              maskImage:
+                "linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 95%)",
+            }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-10%,rgba(19,28,51,0.9),transparent_60%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-stage-black to-transparent" />
+      </div>
       <div className="spotlight-beam" aria-hidden="true" />
+
       <div className="relative mx-auto flex min-h-[86vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6">
         <p className="reveal reveal-1 mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
           Produtora de eventos · Rio de Janeiro
         </p>
-        <h1 className="reveal reveal-2 max-w-5xl font-display text-4xl leading-[1.02] text-warm-white sm:text-6xl lg:text-7xl">
-          Boas ideias.
+        <h1
+          ref={headlineRef}
+          className="max-w-5xl font-display text-4xl leading-[1.02] text-warm-white sm:text-6xl lg:text-7xl"
+        >
+          <SplitWords text="Boas ideias." />
           <br />
-          <span className="text-spotlight">Grandes realizações.</span>
+          <span className="text-spotlight">
+            <SplitWords text="Grandes realizações." startIndex={2} />
+          </span>
         </h1>
         <p className="reveal reveal-3 mt-6 max-w-2xl text-base text-mist sm:text-lg">
           Há quase 30 anos transformando ideias em eventos inesquecíveis no Rio de Janeiro
@@ -279,7 +410,7 @@ function Hero() {
         <div className="reveal reveal-4 mt-10 flex flex-wrap gap-3">
           <a
             href="#fale-conosco"
-            className="inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-6 text-sm font-semibold text-stage-black transition hover:brightness-110"
+            className="btn-primary inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-6 text-sm font-semibold text-stage-black"
           >
             Quero realizar um evento
             <ArrowRight size={18} />
@@ -290,6 +421,59 @@ function Hero() {
           >
             Ver projetos
           </a>
+        </div>
+
+        <a
+          href="#como-fazemos"
+          className="mt-16 inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.28em] text-mist hover:text-spotlight"
+        >
+          Rolar para explorar
+          <ArrowDown size={14} className="arrow-bob" />
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function SplitWords({ text, startIndex = 0 }: { text: string; startIndex?: number }) {
+  const words = text.split(" ");
+  return (
+    <>
+      {words.map((w, i) => (
+        <span
+          key={`${w}-${i}`}
+          className="word-mask"
+          style={{ ["--i" as string]: `${startIndex + i}` } as React.CSSProperties}
+        >
+          <span>{w}</span>
+        </span>
+      ))}
+    </>
+  );
+}
+
+/* ---------- Big outline marquee ---------- */
+function BigMarquee() {
+  const phrases = ["Boas ideias", "Grandes realizações"];
+  // duplicate so the loop is seamless
+  const loop = Array.from({ length: 6 }, (_, i) => phrases[i % 2]);
+  return (
+    <section aria-hidden="true" className="border-y border-border bg-stage-black py-8 sm:py-12">
+      <div className="marquee-xl [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+        <div className="marquee-xl-track">
+          {[0, 1].map((k) => (
+            <div key={k} className="flex">
+              {loop.map((p, i) => {
+                const highlight = i % 4 === 1; // one word per cycle in spotlight
+                return (
+                  <span key={`${k}-${i}`} className="marquee-xl-item">
+                    <span className={highlight ? "fill" : ""}>{p}</span>
+                    <span className="ml-6 opacity-60">—</span>
+                  </span>
+                );
+              })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -322,10 +506,11 @@ function ComoFazemos() {
           </div>
         </div>
 
-        <ol className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map(({ n, title, desc, Icon }) => (
+        <ol className="stagger mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map(({ n, title, desc, Icon }, i) => (
             <li
               key={n}
+              style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
               className="group relative overflow-hidden rounded-2xl border border-border bg-night-blue p-6 transition hover:-translate-y-1 hover:border-spotlight/60"
             >
               <div className="flex items-center justify-between">
@@ -343,22 +528,14 @@ function ComoFazemos() {
 }
 
 /* ---------- Projetos ---------- */
-function ProjectCard({ p, featured = false }: { p: Project; featured?: boolean }) {
+function ProjectCard({ p }: { p: Project }) {
   const [open, setOpen] = useState(false);
   const photo = p.extraImage;
   const logo = p.image;
 
   return (
-    <article
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition duration-500 hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_30px_80px_-30px_rgba(245,185,66,0.45)] ${
-        featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
-      }`}
-    >
-      <div
-        className={`relative overflow-hidden ${
-          featured ? "aspect-[16/11] lg:aspect-auto lg:flex-1" : "aspect-[4/5]"
-        }`}
-      >
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-night-blue transition duration-500 hover:-translate-y-1 hover:border-spotlight/70 hover:shadow-[0_30px_80px_-30px_rgba(245,185,66,0.45)]">
+      <div className="relative aspect-[4/5] overflow-hidden">
         {photo ? (
           <img
             src={photo}
@@ -376,7 +553,6 @@ function ProjectCard({ p, featured = false }: { p: Project; featured?: boolean }
             }}
           />
         )}
-
         <div className="absolute inset-0 bg-gradient-to-t from-stage-black via-stage-black/55 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-br from-stage-black/40 via-transparent to-transparent" />
 
@@ -397,43 +573,35 @@ function ProjectCard({ p, featured = false }: { p: Project; featured?: boolean }
         )}
 
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
-            Case Backstage
+          <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight transition duration-500 group-hover:translate-x-1">
+            {p.meta}
           </p>
-          <h3
-            className={`font-display uppercase leading-[0.95] text-warm-white ${
-              featured ? "text-3xl sm:text-5xl" : "text-xl sm:text-2xl"
-            }`}
-          >
+          <h3 className="font-display text-xl uppercase leading-[0.95] text-warm-white sm:text-2xl">
             {p.name}
           </h3>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 border-t border-warm-white/5 p-5 sm:p-6">
+      <div className="flex flex-col gap-3 border-t border-warm-white/5 p-5 sm:p-6">
+        <p className="font-display text-base italic text-warm-white sm:text-lg">
+          “{p.tagline}”
+        </p>
         <p className="text-sm leading-relaxed text-mist">{p.desc}</p>
         {p.full ? (
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="group/btn inline-flex items-center gap-2 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
+                className="group/btn mt-1 inline-flex items-center gap-2 self-start text-sm font-semibold text-spotlight transition hover:brightness-110"
               >
                 Saiba mais
-                <ArrowRight
-                  size={16}
-                  className="transition group-hover/btn:translate-x-1"
-                />
+                <ArrowRight size={16} className="transition group-hover/btn:translate-x-1" />
               </button>
             </DialogTrigger>
             <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-night-blue p-0 text-warm-white">
               <div className="relative aspect-[16/9] overflow-hidden bg-stage-black">
                 {photo ? (
-                  <img
-                    src={photo}
-                    alt={p.extraAlt ?? p.name}
-                    className="h-full w-full object-cover"
-                  />
+                  <img src={photo} alt={p.extraAlt ?? p.name} className="h-full w-full object-cover" />
                 ) : (
                   <div
                     className="h-full w-full"
@@ -445,15 +613,13 @@ function ProjectCard({ p, featured = false }: { p: Project; featured?: boolean }
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-night-blue via-night-blue/40 to-transparent" />
                 {logo && (
-                  <img
-                    src={logo}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute bottom-4 left-6 h-14 w-auto"
-                  />
+                  <img src={logo} alt="" aria-hidden="true" className="absolute bottom-4 left-6 h-14 w-auto" />
                 )}
               </div>
               <div className="space-y-4 p-6 sm:p-8">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+                  {p.meta}
+                </p>
                 <DialogHeader>
                   <DialogTitle className="font-display text-2xl uppercase tracking-tight text-warm-white sm:text-4xl">
                     {p.name}
@@ -462,14 +628,12 @@ function ProjectCard({ p, featured = false }: { p: Project; featured?: boolean }
                     Case completo do projeto {p.name}
                   </DialogDescription>
                 </DialogHeader>
-                <p className="text-sm leading-relaxed text-mist sm:text-base">
-                  {p.full}
-                </p>
+                <p className="text-sm leading-relaxed text-mist sm:text-base">{p.full}</p>
               </div>
             </DialogContent>
           </Dialog>
         ) : (
-          <span className="inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.2em] text-mist">
+          <span className="mt-1 inline-flex items-center gap-2 self-start text-xs font-semibold uppercase tracking-[0.2em] text-mist">
             Em breve
           </span>
         )}
@@ -497,11 +661,58 @@ function Projetos() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="stagger mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.name} p={p} featured={i === 0} />
+            <div key={p.name} style={{ ["--i" as string]: `${i}` } as React.CSSProperties}>
+              <ProjectCard p={p} />
+            </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Manifesto tipográfico ---------- */
+function Manifesto() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setOn(true);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const words = "Tudo que é sonhado pode ser realizado.".split(" ");
+  return (
+    <section className="border-t border-border py-28 sm:py-40">
+      <div ref={ref} className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+        <p className="mb-8 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+          Manifesto
+        </p>
+        <h2 className="font-display text-4xl uppercase leading-[1.02] sm:text-6xl lg:text-7xl">
+          {words.map((w, i) => (
+            <span
+              key={`${w}-${i}`}
+              className={`manifesto-word mr-3 inline-block ${on ? "on" : ""}`}
+              style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
+            >
+              {w}
+            </span>
+          ))}
+        </h2>
+        <p className="mt-8 text-sm text-mist">— Do manifesto Backstage</p>
       </div>
     </section>
   );
@@ -549,25 +760,216 @@ function QuemSomos() {
               a experiência ideal para fortalecer as relações da sua marca com o público.
               Essa é nossa maior métrica de sucesso.
             </p>
-            <p className="text-warm-white">
-              Quer dar vida à sua ideia? Pode contar com a gente.
-            </p>
+            <p className="text-warm-white">Quer dar vida à sua ideia? Pode contar com a gente.</p>
           </div>
         </div>
 
-        <dl className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STATS.map((s) => (
-            <div
-              key={s.v}
-              className="rounded-2xl border border-border bg-stage-black/60 p-6"
-            >
-              <dt className="font-display text-4xl text-spotlight">{s.k}</dt>
-              <dd className="mt-3 text-sm text-mist">{s.v}</dd>
-            </div>
-          ))}
-        </dl>
+        <StatsGrid />
       </div>
     </section>
+  );
+}
+
+function StatsGrid() {
+  const ref = useRef<HTMLDListElement | null>(null);
+  const [start, setStart] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setStart(true);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <dl ref={ref} className="stagger mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {STATS.map((s, i) => (
+        <div
+          key={s.label}
+          style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
+          className="rounded-2xl border border-border bg-stage-black/60 p-6"
+        >
+          <dt className="font-display text-5xl text-spotlight sm:text-6xl">
+            <CountUp value={s.value} start={start} prefix={s.prefix} suffix={s.suffix} />
+          </dt>
+          <dd className="mt-3 text-sm text-mist">{s.label}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function CountUp({
+  value,
+  start,
+  prefix,
+  suffix,
+}: {
+  value: number;
+  start: boolean;
+  prefix?: string;
+  suffix?: string;
+}) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setN(value);
+      return;
+    }
+    const duration = 900;
+    const t0 = performance.now();
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setN(value * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [start, value]);
+  const display =
+    value >= 100 ? Math.round(n).toLocaleString("pt-BR") : Math.round(n).toString();
+  return (
+    <span>
+      {prefix}
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+/* ---------- Timeline ---------- */
+function Timeline() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const fillRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const wrap = ref.current;
+    const fill = fillRef.current;
+    if (!wrap || !fill) return;
+    let raf = 0;
+    const update = () => {
+      const rect = wrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = vh * 0.85;
+      const end = vh * 0.15;
+      const total = rect.height + (start - end);
+      const traveled = start - rect.top;
+      const p = Math.max(0, Math.min(1, traveled / total));
+      fill.style.setProperty("--p", `${p}`);
+      raf = 0;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <section id="linha-do-tempo" className="border-t border-border py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+          Nossa história
+        </p>
+        <h2 className="max-w-3xl font-display text-3xl text-warm-white sm:text-5xl">
+          30 anos de grandes realizações.
+        </h2>
+
+        <div ref={ref} className="timeline relative mt-16">
+          <div ref={fillRef} className="timeline-fill" />
+          <ul className="space-y-14 md:space-y-24">
+            {TIMELINE.map((item, i) => {
+              const rightSide = i % 2 === 1;
+              return (
+                <li key={item.year} className="relative">
+                  <div className="grid grid-cols-[36px_1fr] gap-4 md:grid-cols-2 md:gap-16">
+                    {/* Dot column (mobile) / left content (desktop) */}
+                    <div className="md:hidden">
+                      <TimelineDot />
+                    </div>
+                    {/* Desktop left cell */}
+                    <div className={`hidden md:block ${rightSide ? "" : "md:pr-16 md:text-right"}`}>
+                      {!rightSide && <TimelineItem item={item} align="right" />}
+                    </div>
+                    {/* Desktop right cell */}
+                    <div className={`hidden md:block ${rightSide ? "md:pl-16" : ""}`}>
+                      {rightSide && <TimelineItem item={item} align="left" />}
+                    </div>
+                    {/* Mobile content */}
+                    <div className="md:hidden">
+                      <TimelineItem item={item} align="left" />
+                    </div>
+                  </div>
+                  {/* Center dot (desktop) */}
+                  <div className="pointer-events-none absolute left-1/2 top-2 hidden -translate-x-1/2 md:block">
+                    <TimelineDot />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TimelineDot() {
+  return (
+    <span className="block h-3 w-3 rounded-full border-2 border-spotlight bg-stage-black" />
+  );
+}
+
+function TimelineItem({
+  item,
+  align,
+}: {
+  item: { year: string; text: string; cta?: boolean };
+  align: "left" | "right";
+}) {
+  return (
+    <div className={align === "right" ? "md:items-end" : ""}>
+      <p
+        aria-hidden="true"
+        className="font-display text-5xl uppercase leading-none tracking-tight sm:text-7xl"
+        style={{
+          color: "transparent",
+          WebkitTextStroke: "1px rgba(245, 185, 66, 0.7)",
+        }}
+      >
+        {item.year}
+      </p>
+      <p className="mt-3 max-w-sm text-base text-warm-white sm:text-lg">
+        {item.text}
+      </p>
+      {item.cta && (
+        <a
+          href="#fale-conosco"
+          className="btn-primary mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-spotlight px-5 text-sm font-semibold text-stage-black"
+        >
+          Comece com a gente
+          <ArrowRight size={16} />
+        </a>
+      )}
+    </div>
   );
 }
 
@@ -694,7 +1096,7 @@ function Contato() {
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-8 text-sm font-semibold text-stage-black transition hover:brightness-110 disabled:opacity-60"
+              className="btn-primary inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-8 text-sm font-semibold text-stage-black disabled:opacity-60"
             >
               {submitting ? "Enviando..." : "Fale conosco"}
               <ArrowRight size={18} />
@@ -765,6 +1167,75 @@ function TextArea({ label, name, error }: { label: string; name: string; error?:
         </p>
       )}
     </div>
+  );
+}
+
+/* ---------- Footer CTA blocks ---------- */
+function FooterCTAs() {
+  const items: {
+    kicker: string;
+    title: string;
+    href: string;
+    external?: boolean;
+  }[] = [
+    { kicker: "Fale conosco", title: "Conte sua ideia", href: "#fale-conosco" },
+    { kicker: "Nossos projetos", title: "30 anos de realizações", href: "#projetos" },
+    {
+      kicker: "Siga a Backstage",
+      title: "@backstage.rio.producoes",
+      href: "https://instagram.com/backstage.rio.producoes",
+      external: true,
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-stage-black">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 md:grid-cols-3">
+        {items.map((it) => (
+          <FooterCTA key={it.href} {...it} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FooterCTA({
+  kicker,
+  title,
+  href,
+  external,
+}: {
+  kicker: string;
+  title: string;
+  href: string;
+  external?: boolean;
+}): ReactNode {
+  const common =
+    "group flex items-center justify-between gap-4 border-b border-border p-8 transition hover:bg-night-blue/40 md:border-b-0 md:border-r md:last:border-r-0 sm:p-10";
+  const inner = (
+    <>
+      <div>
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+          {kicker}
+        </p>
+        <p className="font-display text-2xl uppercase text-warm-white sm:text-3xl">{title}</p>
+      </div>
+      <ArrowRight
+        size={28}
+        className="shrink-0 text-warm-white/60 transition group-hover:translate-x-1 group-hover:text-spotlight"
+      />
+    </>
+  );
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={common}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <a href={href} className={common}>
+      {inner}
+    </a>
   );
 }
 
