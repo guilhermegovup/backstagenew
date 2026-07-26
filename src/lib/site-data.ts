@@ -53,9 +53,10 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Disney Millenium",
-    photo: "/projetos/fotos/disney.webp",
-    photoW: 410,
-    photoH: 870,
+    photo: "/projetos/fotos/disney.jpg",
+    photoW: 1408,
+    photoH: 944,
+
     slug: "disney-millenium",
     meta: "Entretenimento · 2000 / Baía de Guanabara",
     tagline: "Quando o Mickey escolheu o Rio.",
@@ -85,9 +86,10 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Festival Vale do Café",
-    photo: "/projetos/fotos/vale.webp",
-    photoW: 647,
-    photoH: 870,
+    photo: "/projetos/fotos/vale.jpg",
+    photoW: 1408,
+    photoH: 944,
+
     slug: "festival-vale-do-cafe",
     meta: "Cultura · Desde 2003 / Vale do Paraíba",
     tagline: "Palacetes históricos como palco.",
@@ -102,10 +104,15 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Circuito Energia em Movimento",
+    photo: "/projetos/fotos/energia.jpg",
+    photoW: 1408,
+    photoH: 944,
     slug: "circuito-energia-em-movimento",
     meta: "Esporte / Rio de Janeiro",
     tagline: "Movimento que vira qualidade de vida.",
     desc: "Circuito de eventos esportivos e de qualidade de vida.",
+    cardAlt: "Participantes em atividades esportivas ao ar livre no Rio de Janeiro",
+
   },
 ];
 
