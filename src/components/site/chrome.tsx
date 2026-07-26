@@ -11,6 +11,7 @@ import {
   Facebook,
 } from "lucide-react";
 import { NAV, CONTACT } from "@/lib/site-data";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 
 /* ---------- Shell ---------- */
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -81,20 +82,23 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-md bg-stage-black/70 border-b border-border"
+          ? "backdrop-blur-md bg-background/70 border-b border-border"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" aria-label="Backstage — página inicial" className="flex items-center">
-          <img
-            src="/brand/logo-backstage-branco.svg"
-            alt="Backstage"
-            className="h-8 w-auto"
-            width={140}
-            height={32}
-          />
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link to="/" aria-label="Backstage — página inicial" className="flex items-center">
+            <img
+              src="/brand/logo-backstage-branco.svg"
+              alt="Backstage"
+              className="brand-logo h-8 w-auto"
+              width={140}
+              height={32}
+            />
+          </Link>
+          <ThemeToggle />
+        </div>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((n) => (
             <Link
@@ -125,7 +129,7 @@ export function Navbar() {
         </button>
       </div>
       {open && (
-        <div className="border-t border-border bg-stage-black/95 backdrop-blur-md md:hidden">
+        <div className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
             {NAV.map((n) => (
               <Link
@@ -224,7 +228,7 @@ export function Footer() {
           <img
             src="/brand/logo-backstage-branco.svg"
             alt="Backstage"
-            className="h-10 w-auto"
+            className="brand-logo h-10 w-auto"
             width={180}
             height={40}
           />
