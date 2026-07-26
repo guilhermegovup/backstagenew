@@ -53,28 +53,30 @@ function Hero() {
   }, []);
 
   return (
-    <section className="dark-hero relative flex min-h-[92vh] items-end overflow-hidden">
+    <section className="dark-hero relative flex min-h-[100svh] items-end overflow-hidden sm:min-h-[92vh]">
       <div className="absolute inset-0" aria-hidden="true">
         <img
           src="/projetos/fotos/arvore.webp"
           alt=""
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-[60%_center] sm:object-center"
         />
-        <div className="absolute inset-0 bg-stage-black/45" />
+        <div className="absolute inset-0 bg-stage-black/35 sm:bg-stage-black/45" />
         <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_50%_40%,transparent_0%,rgba(11,11,16,0.55)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-stage-black via-stage-black/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-stage-black via-stage-black/85 to-transparent sm:h-2/3 sm:via-stage-black/80" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-32 sm:px-6 sm:pb-24">
+      <div className="relative mx-auto w-full max-w-7xl px-5 pb-12 pt-28 sm:px-6 sm:pb-24 sm:pt-32">
         <p
-          className={`hero-line ${entered ? "is-in" : ""} mb-6 font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-spotlight sm:text-xs`}
+          className={`hero-line ${entered ? "is-in" : ""} mb-5 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[0.22em] text-spotlight sm:mb-6 sm:text-xs sm:tracking-[0.3em]`}
           style={{ transitionDelay: "0ms" }}
         >
-          Produtora de eventos · Rio de Janeiro · Desde 1996
+          Produtora de eventos · Rio de Janeiro
+          <span className="hidden sm:inline"> · Desde 1996</span>
+          <span className="block sm:hidden">Desde 1996</span>
         </p>
 
         <h1
-          className={`hero-line ${entered ? "is-in" : ""} max-w-5xl font-display text-[2.6rem] uppercase leading-[0.92] text-warm-white sm:text-7xl lg:text-8xl`}
+          className={`hero-line ${entered ? "is-in" : ""} max-w-5xl font-display text-[2.15rem] uppercase leading-[0.94] tracking-[-0.01em] text-warm-white sm:text-7xl sm:leading-[0.92] lg:text-8xl`}
           style={{ transitionDelay: "90ms" }}
         >
           Boas ideias.
@@ -83,7 +85,7 @@ function Hero() {
         </h1>
 
         <p
-          className={`hero-line ${entered ? "is-in" : ""} mt-8 max-w-xl text-base leading-relaxed text-warm-white/80 sm:text-lg`}
+          className={`hero-line ${entered ? "is-in" : ""} mt-5 max-w-xl text-[0.95rem] leading-relaxed text-warm-white/75 sm:mt-8 sm:text-lg sm:text-warm-white/80`}
           style={{ transitionDelay: "180ms" }}
         >
           Há quase 30 anos transformando ideias em eventos inesquecíveis no Rio de Janeiro e
@@ -91,19 +93,19 @@ function Hero() {
         </p>
 
         <div
-          className={`hero-line ${entered ? "is-in" : ""} mt-10 flex flex-wrap items-center gap-4`}
+          className={`hero-line ${entered ? "is-in" : ""} mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4`}
           style={{ transitionDelay: "270ms" }}
         >
           <Link
             to="/contato"
-            className="btn-primary inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-7 text-sm font-semibold text-stage-black"
+            className="btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-spotlight px-7 text-sm font-semibold text-stage-black sm:w-auto"
           >
             Quero realizar um evento
             <ArrowRight size={18} />
           </Link>
           <a
             href="#projetos"
-            className="inline-flex min-h-12 items-center rounded-full border border-warm-white/30 px-7 text-sm font-semibold text-warm-white transition hover:border-spotlight hover:text-spotlight"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-warm-white/30 px-7 text-sm font-semibold text-warm-white transition hover:border-spotlight hover:text-spotlight sm:w-auto"
           >
             Ver os projetos
           </a>
@@ -111,13 +113,14 @@ function Hero() {
 
         <a
           href="#projetos"
-          className="mt-14 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-warm-white/50 transition hover:text-spotlight"
+          className="mt-8 inline-flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-warm-white/50 transition hover:text-spotlight sm:mt-14 sm:text-[10px] sm:tracking-[0.28em]"
         >
           Rolar para explorar
           <ArrowDown size={13} className="arrow-bob" />
         </a>
       </div>
     </section>
+
   );
 }
 
