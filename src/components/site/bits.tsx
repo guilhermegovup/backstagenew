@@ -141,29 +141,30 @@ function CountUp({
 /* ---------- Clientes ---------- */
 export function Clientes() {
   const ref = useScrollReveal();
-  const doubled = [...CLIENTS, ...CLIENTS];
   return (
     <section id="clientes" ref={ref} className="on-scroll border-t border-border py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
-          Clientes
-        </p>
-        <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
-          Quem já realizou com a gente
-        </h2>
-      </div>
-      <div className="marquee mt-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="marquee-track flex w-max gap-6">
-          {doubled.map((c, i) => (
+        <div className="mb-14 max-w-2xl">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+            Clientes
+          </p>
+          <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
+            Quem já realizou com a gente
+          </h2>
+        </div>
+
+        <div className="client-chips grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {CLIENTS.map((c, i) => (
             <div
-              key={`${c.name}-${i}`}
-              className="grid h-24 w-48 shrink-0 place-items-center rounded-xl bg-warm-white px-6 py-4"
+              key={c.name}
+              className="client-chip group grid h-24 place-items-center rounded-xl border border-border bg-white px-5 py-4 transition duration-300 hover:-translate-y-1 hover:border-spotlight/40 hover:shadow-lg"
+              style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
             >
               <img
                 src={c.src}
                 alt={c.name}
                 loading="lazy"
-                className="max-h-12 w-full object-contain"
+                className="max-h-11 w-full object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
               />
             </div>
           ))}
