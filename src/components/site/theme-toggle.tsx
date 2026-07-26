@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Theme = "dark" | "light";
 const KEY = "backstage-theme";
@@ -9,7 +10,7 @@ function apply(theme: Theme) {
   root.classList.toggle("light", theme === "light");
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
@@ -34,7 +35,10 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
       title={isDark ? "Modo claro" : "Modo escuro"}
-      className="inline-flex min-h-9 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-white/80 transition hover:border-spotlight hover:text-spotlight"
+      className={cn(
+        "inline-flex min-h-9 items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition hover:border-spotlight hover:text-spotlight",
+        className,
+      )}
     >
       {isDark ? <Sun size={15} /> : <Moon size={15} />}
       <span className="hidden sm:inline">{isDark ? "Claro" : "Escuro"}</span>

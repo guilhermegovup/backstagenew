@@ -53,7 +53,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[92vh] items-end overflow-hidden">
+    <section className="dark-hero relative flex min-h-[92vh] items-end overflow-hidden">
       <div className="absolute inset-0" aria-hidden="true">
         <img
           src="/projetos/fotos/arvore.webp"
