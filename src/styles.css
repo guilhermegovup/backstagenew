@@ -434,3 +434,16 @@ html.light .dark-hero {
 
 /* Navbar transparente sobre a hero escura mantém logo branco */
 html.light header[data-over-hero="true"] .brand-logo { filter: none; }
+
+/* Força tokens escuros na navbar quando ela está sobre a hero escura no modo claro */
+html.light header[data-over-hero="true"] {
+  --stage-black: #0B0B10;
+  --night-blue: #131C33;
+  --spotlight: #F5B942;
+  --warm-white: #F7F3EA;
+  --mist: #8A90A3;
+  --background: var(--stage-black);
+  --foreground: var(--warm-white);
+  --muted: #1A2340;
+  --border: rgba(247, 243, 234, 0.10);
+}
