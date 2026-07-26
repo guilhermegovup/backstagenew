@@ -327,9 +327,23 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ---------- Clientes grid ---------- */
+.client-chips .client-chip {
+  opacity: 0;
+  transform: translateY(18px) scale(0.96);
+  transition: opacity 450ms ease-out, transform 450ms ease-out, border-color 300ms ease, box-shadow 300ms ease;
+  transition-delay: calc(var(--i, 0) * 40ms);
+}
+.on-scroll.is-visible .client-chips .client-chip {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .on-scroll,
-  .stagger > * { opacity: 1; transform: none; transition: none; }
+  .stagger > *,
+  .client-chips .client-chip { opacity: 1; transform: none; transition: none; }
 }
 
 
