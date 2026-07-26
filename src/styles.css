@@ -361,3 +361,46 @@
 
 /* Defesa contra estouro horizontal (clip não quebra sticky/fixed como hidden) */
 html, body { overflow-x: clip; }
+
+/* ================= MODO CLARO ================= */
+html.light {
+  --stage-black: #F7F3EA;   /* fundo claro (papel quente) */
+  --night-blue: #ECE5D6;    /* superfícies */
+  --spotlight: #B87914;     /* âmbar com contraste em fundo claro */
+  --warm-white: #12141C;    /* texto principal (escuro) */
+  --mist: #5A5F70;          /* texto secundário */
+
+  --background: var(--stage-black);
+  --foreground: var(--warm-white);
+  --card: #FFFFFF;
+  --card-foreground: var(--warm-white);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--warm-white);
+  --primary: var(--spotlight);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--night-blue);
+  --secondary-foreground: var(--warm-white);
+  --muted: #E4DCCB;
+  --muted-foreground: var(--mist);
+  --accent: var(--spotlight);
+  --accent-foreground: #FFFFFF;
+  --border: rgba(18, 20, 28, 0.12);
+  --input: rgba(18, 20, 28, 0.18);
+}
+
+/* logo branca vira escura no modo claro */
+html.light .brand-logo { filter: invert(1) brightness(0.15); }
+
+/* efeitos de luz precisam inverter a mistura em fundo claro */
+html.light .film-grain { mix-blend-mode: multiply; opacity: 0.05; }
+html.light .cursor-spot {
+  mix-blend-mode: multiply;
+  background: radial-gradient(
+    500px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(184, 121, 20, 0.10),
+    transparent 60%
+  );
+}
+html.light .spotlight-beam { mix-blend-mode: multiply; opacity: 0.5; }
+html.light .project-photo img { filter: none; }
+html.light .project-photo .tint { opacity: 0; }
