@@ -153,12 +153,12 @@ export function Clientes() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        <div className="client-chips grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {CLIENTS.map((c, i) => (
             <div
               key={c.name}
               className="client-chip group grid h-24 place-items-center rounded-xl border border-border bg-white px-5 py-4 transition duration-300 hover:-translate-y-1 hover:border-spotlight/40 hover:shadow-lg"
-              style={{ transitionDelay: `${i * 30}ms` } as React.CSSProperties}
+              style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
             >
               <img
                 src={c.src}
