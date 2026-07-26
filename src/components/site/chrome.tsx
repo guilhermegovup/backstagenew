@@ -70,6 +70,9 @@ export function CursorSpotlight() {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const isHome = router.state.location.pathname === "/";
+  const overDarkHero = isHome && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -80,10 +83,13 @@ export function Navbar() {
 
   return (
     <header
+      data-over-hero={overDarkHero}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-md bg-background/70 border-b border-border"
-          : "bg-transparent"
+        overDarkHero
+          ? "bg-transparent"
+          : scrolled
+            ? "backdrop-blur-md bg-background/70 border-b border-border"
+            : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
@@ -97,7 +103,13 @@ export function Navbar() {
               height={32}
             />
           </Link>
-          <ThemeToggle />
+          <ThemeToggle
+            className={
+              overDarkHero
+                ? "border-warm-white/30 text-warm-white/80 hover:border-spotlight hover:text-spotlight"
+                : "border-border text-foreground/80 hover:border-spotlight hover:text-spotlight"
+            }
+          />
         </div>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((n) => (
@@ -105,8 +117,14 @@ export function Navbar() {
               key={n.label}
               to={n.to}
               hash={"hash" in n ? n.hash : undefined}
-              className="nav-link text-sm text-warm-white/80 transition hover:text-warm-white"
-              activeProps={{ className: "nav-link text-sm text-warm-white" }}
+              className={`nav-link text-sm transition ${
+                overDarkHero
+                  ? "text-warm-white/80 hover:text-warm-white"
+                  : "text-foreground/80 hover:text-foreground"
+              }`}
+              activeProps={{
+                className: `nav-link text-sm ${overDarkHero ? "text-warm-white" : "text-foreground"}`,
+              }}
             >
               {n.label}
             </Link>
@@ -123,7 +141,9 @@ export function Navbar() {
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="grid h-11 w-11 place-items-center rounded-md text-warm-white md:hidden"
+          className={`grid h-11 w-11 place-items-center rounded-md md:hidden ${
+            overDarkHero ? "text-warm-white" : "text-foreground"
+          }`}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -137,7 +157,7 @@ export function Navbar() {
                 to={n.to}
                 hash={"hash" in n ? n.hash : undefined}
                 onClick={() => setOpen(false)}
-                className="min-h-11 rounded-md px-3 py-3 text-warm-white/90 hover:bg-night-blue"
+                className="min-h-11 rounded-md px-3 py-3 text-foreground/90 hover:bg-muted"
               >
                 {n.label}
               </Link>
