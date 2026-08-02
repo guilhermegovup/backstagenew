@@ -87,36 +87,36 @@ function ProjectPage() {
       </header>
 
       {/* Case */}
-      <article ref={bodyRef} className="on-scroll border-t border-border py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-12 lg:grid-cols-12">
+      <article ref={bodyRef} className="on-scroll border-t border-border py-14 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:text-xs sm:tracking-[0.3em]">
                 O projeto
               </p>
-              <p className="mt-5 text-lg leading-relaxed text-warm-white">{p.desc}</p>
+              <p className="mt-4 text-justified text-base leading-relaxed text-warm-white sm:mt-5 sm:text-lg">{p.desc}</p>
               {p.image ? (
                 <img
                   src={p.image}
                   alt={p.imageAlt ?? p.name}
                   loading="lazy"
-                  className="mt-8 max-h-24 w-auto opacity-80"
+                  className="mt-6 max-h-20 w-auto opacity-80 sm:mt-8 sm:max-h-24"
                 />
               ) : null}
             </div>
 
             <div className="lg:col-span-8">
               {p.full ? (
-                <p className="text-base leading-relaxed text-mist sm:text-lg">{p.full}</p>
+                <p className="text-justified text-[0.95rem] leading-relaxed text-mist sm:text-lg">{p.full}</p>
               ) : (
-                <p className="text-base leading-relaxed text-mist sm:text-lg">
+                <p className="text-justified text-[0.95rem] leading-relaxed text-mist sm:text-lg">
                   Case completo em breve. Fale com a gente para conhecer os detalhes desta
                   realização.
                 </p>
               )}
 
               {p.photo ? (
-                <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-night-blue">
+                <figure className="mt-8 overflow-hidden rounded-2xl border border-border bg-night-blue sm:mt-10">
                   <img
                     src={p.photo}
                     alt={p.cardAlt ?? p.name}
@@ -130,7 +130,7 @@ function ProjectPage() {
 
               <Link
                 to="/contato"
-                className="btn-primary mt-12 inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-6 text-sm font-semibold text-stage-black"
+                className="btn-primary mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-spotlight px-6 text-sm font-semibold text-stage-black sm:mt-12 sm:w-auto"
               >
                 Quero realizar um evento assim
                 <ArrowRight size={18} />
