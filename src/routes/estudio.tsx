@@ -301,7 +301,7 @@ function TimelineItem({
     <div className={align === "right" ? "md:items-end" : ""}>
       <p
         aria-hidden="true"
-        className="font-display text-5xl uppercase leading-none tracking-tight sm:text-7xl"
+        className="font-display text-4xl uppercase leading-none tracking-tight sm:text-7xl"
         style={{
           color: "transparent",
           WebkitTextStroke: "1px rgba(245, 185, 66, 0.7)",
@@ -309,7 +309,7 @@ function TimelineItem({
       >
         {item.year}
       </p>
-      <p className="mt-3 max-w-sm text-base text-warm-white sm:text-lg">
+      <p className={`mt-3 max-w-sm text-[0.95rem] text-warm-white sm:text-lg ${align === "right" ? "md:ml-auto" : ""}`}>
         {item.text}
       </p>
       {item.cta && (
@@ -329,12 +329,12 @@ function TimelineItem({
 function VideoSection() {
   const ref = useScrollReveal();
   return (
-    <section ref={ref} className="on-scroll border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <section ref={ref} className="on-scroll border-t border-border py-16 sm:py-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
           Assista
         </p>
-        <h2 className="mb-10 font-display text-3xl text-warm-white sm:text-5xl">
+        <h2 className="mb-6 font-display text-2xl text-warm-white sm:mb-10 sm:text-5xl">
           Bastidor em movimento.
         </h2>
         <div className="relative overflow-hidden rounded-2xl border border-border bg-night-blue">
