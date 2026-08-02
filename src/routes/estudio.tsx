@@ -236,23 +236,23 @@ function Timeline() {
   }, []);
 
   return (
-    <section id="linha-do-tempo" className="border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <section id="linha-do-tempo" className="border-t border-border py-16 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
           Nossa história
         </p>
-        <h2 className="max-w-3xl font-display text-3xl text-warm-white sm:text-5xl">
+        <h2 className="max-w-3xl font-display text-2xl text-warm-white sm:text-5xl">
           30 anos de grandes realizações.
         </h2>
 
-        <div ref={ref} className="timeline relative mt-16">
+        <div ref={ref} className="timeline relative mt-10 sm:mt-16">
           <div ref={fillRef} className="timeline-fill" />
-          <ul className="space-y-14 md:space-y-24">
+          <ul className="space-y-10 md:space-y-24">
             {TIMELINE.map((item, i) => {
               const rightSide = i % 2 === 1;
               return (
                 <li key={item.year} className="relative">
-                  <div className="grid grid-cols-[36px_1fr] gap-4 md:grid-cols-2 md:gap-16">
+                  <div className="grid grid-cols-[20px_minmax(0,1fr)] gap-3 md:grid-cols-2 md:gap-16">
                     {/* Dot column (mobile) / left content (desktop) */}
                     <div className="md:hidden">
                       <TimelineDot />
