@@ -122,20 +122,20 @@ function Contato() {
   };
 
   return (
-    <section id="fale-conosco" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
-          Fale conosco
+    <section id="fale-conosco" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-16 sm:py-32">
+      <div className="mx-auto max-w-4xl px-5 sm:px-6">
+        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
+          Formulário
         </p>
-        <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
-          O que você quer realizar?
+        <h2 className="font-display text-2xl text-warm-white sm:text-5xl">
+          Conte sua ideia.
         </h2>
-        <p className="mt-4 text-mist">
+        <p className="mt-4 text-justified text-[0.95rem] text-mist sm:text-base">
           Conte um pouco sobre a sua ideia. Nosso time entra em contato para desenhar
           o próximo grande feito com você.
         </p>
 
-        <form onSubmit={onSubmit} noValidate className="mt-10 grid gap-5 sm:grid-cols-2">
+        <form onSubmit={onSubmit} noValidate className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5">
           <Field label="Primeiro Nome" name="firstName" required error={errors.firstName} />
           <Field label="Sobrenome" name="lastName" error={errors.lastName} />
           <Field label="E-mail" name="email" type="email" required error={errors.email} />
@@ -147,7 +147,7 @@ function Contato() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-primary inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-8 text-sm font-semibold text-stage-black disabled:opacity-60"
+              className="btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-spotlight px-8 text-sm font-semibold text-stage-black disabled:opacity-60 sm:w-auto"
             >
               {submitting ? "Enviando..." : "Fale conosco"}
               <ArrowRight size={18} />
