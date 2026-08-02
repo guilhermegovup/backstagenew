@@ -43,7 +43,7 @@ function ProjectPage() {
   return (
     <SiteShell>
       {/* Capa */}
-      <header className="relative flex min-h-[70vh] items-end overflow-hidden pt-24">
+      <header className="relative flex min-h-[62vh] items-end overflow-hidden pt-24 sm:min-h-[70vh]">
         <div className="absolute inset-0" aria-hidden="true">
           {p.photo ? (
             <img
@@ -65,22 +65,22 @@ function ProjectPage() {
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-stage-black via-stage-black/70 to-transparent" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24">
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-12 sm:px-6 sm:pb-24">
           <Link
             to="/"
             hash="projetos"
-            className="mb-8 inline-flex min-h-11 items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-mist transition hover:text-spotlight"
+            className="mb-6 inline-flex min-h-11 items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-mist transition hover:text-spotlight sm:mb-8 sm:text-xs sm:tracking-[0.28em]"
           >
             <ArrowLeft size={14} />
             Todos os projetos
           </Link>
-          <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-spotlight sm:text-[11px]">
+          <p className="mb-3 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[0.22em] text-spotlight sm:mb-4 sm:text-[11px] sm:tracking-[0.3em]">
             {p.meta}
           </p>
-          <h1 className="max-w-4xl font-display text-4xl uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl font-display text-[2rem] uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
             {p.name}
           </h1>
-          <p className="mt-6 max-w-2xl font-display text-lg italic text-warm-white sm:text-2xl">
+          <p className="mt-4 max-w-2xl font-display text-base italic text-warm-white sm:mt-6 sm:text-2xl">
             “{p.tagline}”
           </p>
         </div>
