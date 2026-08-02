@@ -80,12 +80,12 @@ function Manifesto() {
   }, []);
   const words = "Tudo que é sonhado pode ser realizado.".split(" ");
   return (
-    <section className="border-t border-border py-28 sm:py-40">
-      <div ref={ref} className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-        <p className="mb-8 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <section className="border-t border-border py-20 sm:py-40">
+      <div ref={ref} className="mx-auto max-w-5xl px-5 text-center sm:px-6">
+        <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-8 sm:text-xs sm:tracking-[0.3em]">
           Manifesto
         </p>
-        <h2 className="font-display text-4xl uppercase leading-[1.02] sm:text-6xl lg:text-7xl">
+        <h2 className="font-display text-[1.9rem] uppercase leading-[1.05] sm:text-6xl lg:text-7xl">
           {words.map((w, i) => (
             <span
               key={`${w}-${i}`}
@@ -106,18 +106,18 @@ function Manifesto() {
 function QuemSomos() {
   const ref = useScrollReveal();
   return (
-    <section id="quem-somos" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-12 lg:grid-cols-12">
+    <section id="quem-somos" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-16 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
               Quem somos
             </p>
-            <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
+            <h2 className="font-display text-2xl text-warm-white sm:text-5xl">
               Uma produtora feita de gente apaixonada por realizar.
             </h2>
           </div>
-          <div className="space-y-5 text-base text-mist sm:text-lg lg:col-span-7">
+          <div className="space-y-4 text-justified text-[0.95rem] leading-relaxed text-mist sm:space-y-5 sm:text-lg lg:col-span-7">
             <p className="text-warm-white">
               Somos a produtora que transforma boas ideias em grandes realizações.
             </p>
