@@ -158,19 +158,19 @@ function QuemSomos() {
 function ComoFazemos() {
   const ref = useScrollReveal();
   return (
-    <section id="como-fazemos" ref={ref} className="on-scroll border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-12 lg:grid-cols-12">
+    <section id="como-fazemos" ref={ref} className="on-scroll border-t border-border py-16 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
               Como fazemos
             </p>
-            <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
+            <h2 className="font-display text-2xl text-warm-white sm:text-5xl">
               Da ideia ao aplauso.
             </h2>
           </div>
           <div className="lg:col-span-7">
-            <p className="text-base text-mist sm:text-lg">
+            <p className="text-justified text-[0.95rem] leading-relaxed text-mist sm:text-lg">
               A ideia é a matéria-prima para todo grande feito. Seja para criar um projeto do
               zero ou resolver o desafio de um cliente, nossa equipe criativa está sempre pronta
               para encontrar a solução. A história é feita de grandes conquistas. Para nós, toda
@@ -180,19 +180,19 @@ function ComoFazemos() {
           </div>
         </div>
 
-        <ol className="stagger mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="stagger mt-10 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {STEPS.map(({ n, title, desc, Icon }, i) => (
             <li
               key={n}
               style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-night-blue p-6 transition hover:-translate-y-1 hover:border-spotlight/60"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-night-blue p-5 transition hover:-translate-y-1 hover:border-spotlight/60 sm:p-6"
             >
               <div className="flex items-center justify-between">
                 <span className="font-display text-2xl text-spotlight">{n}</span>
-                <Icon size={22} className="text-warm-white/70 transition group-hover:text-spotlight" />
+                <Icon size={22} className="shrink-0 text-warm-white/70 transition group-hover:text-spotlight" />
               </div>
-              <h3 className="mt-6 font-display text-xl text-warm-white">{title}</h3>
-              <p className="mt-3 text-sm text-mist">{desc}</p>
+              <h3 className="mt-4 font-display text-lg text-warm-white sm:mt-6 sm:text-xl">{title}</h3>
+              <p className="mt-2 text-justified text-sm text-mist sm:mt-3">{desc}</p>
             </li>
           ))}
         </ol>
