@@ -19,11 +19,11 @@ export const Route = createFileRoute("/")({
         content:
           "Backstage: quase 30 anos transformando ideias em eventos inesquecíveis — da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara.",
       },
-      { property: "og:title", content: "Backstage — Boas ideias. Grandes realizações." },
+      { property: "og:title", content: "Backstage — Produção de Eventos no Rio de Janeiro" },
       {
         property: "og:description",
         content:
-          "Produtora carioca especializada em grandes eventos: cultura, esporte, entretenimento e experiências de marca.",
+          "Backstage: quase 30 anos transformando ideias em eventos inesquecíveis — da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara.",
       },
       { property: "og:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
       { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
