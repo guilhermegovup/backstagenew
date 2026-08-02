@@ -145,19 +145,19 @@ function ProjectPage() {
         <Link
           to="/projetos/$slug"
           params={{ slug: next.slug }}
-          className="group mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-4 py-14 transition hover:bg-night-blue/40 sm:px-6 sm:py-20"
+          className="group mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-10 transition hover:bg-night-blue/40 sm:flex sm:justify-between sm:gap-6 sm:px-6 sm:py-20"
         >
-          <div>
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+          <div className="min-w-0">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-spotlight sm:mb-3 sm:tracking-[0.28em]">
               Próximo projeto
             </p>
-            <p className="font-display text-3xl uppercase leading-none text-warm-white transition group-hover:text-spotlight sm:text-5xl">
+            <p className="font-display text-2xl uppercase leading-none text-warm-white transition group-hover:text-spotlight sm:text-5xl">
               {next.name}
             </p>
           </div>
           <ArrowRight
-            size={36}
-            className="shrink-0 text-warm-white/60 transition group-hover:translate-x-2 group-hover:text-spotlight"
+            size={28}
+            className="shrink-0 text-warm-white/60 transition group-hover:translate-x-2 group-hover:text-spotlight sm:size-9"
           />
         </Link>
       </nav>
