@@ -40,15 +40,15 @@ function Estudio() {
 
 function PageHeader() {
   return (
-    <header className="border-b border-border pt-32 pb-16 sm:pt-40 sm:pb-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <header className="border-b border-border pt-28 pb-12 sm:pt-40 sm:pb-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-5 sm:text-xs sm:tracking-[0.3em]">
           Estúdio
         </p>
-        <h1 className="max-w-4xl font-display text-4xl uppercase leading-[0.98] text-warm-white sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-4xl font-display text-[2rem] uppercase leading-[0.98] text-warm-white sm:text-6xl lg:text-7xl">
           Quem faz acontecer
         </h1>
-        <p className="mt-6 max-w-2xl text-base text-mist sm:text-lg">
+        <p className="mt-5 max-w-2xl text-justified text-[0.95rem] text-mist sm:mt-6 sm:text-lg">
           Engenheiros, arquitetos, comunicólogos e designers reunidos para botar ideias de pé —
           há quase 30 anos.
         </p>
@@ -80,12 +80,12 @@ function Manifesto() {
   }, []);
   const words = "Tudo que é sonhado pode ser realizado.".split(" ");
   return (
-    <section className="border-t border-border py-28 sm:py-40">
-      <div ref={ref} className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-        <p className="mb-8 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <section className="border-t border-border py-20 sm:py-40">
+      <div ref={ref} className="mx-auto max-w-5xl px-5 text-center sm:px-6">
+        <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-8 sm:text-xs sm:tracking-[0.3em]">
           Manifesto
         </p>
-        <h2 className="font-display text-4xl uppercase leading-[1.02] sm:text-6xl lg:text-7xl">
+        <h2 className="font-display text-[1.9rem] uppercase leading-[1.05] sm:text-6xl lg:text-7xl">
           {words.map((w, i) => (
             <span
               key={`${w}-${i}`}
@@ -106,18 +106,18 @@ function Manifesto() {
 function QuemSomos() {
   const ref = useScrollReveal();
   return (
-    <section id="quem-somos" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-12 lg:grid-cols-12">
+    <section id="quem-somos" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-16 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
               Quem somos
             </p>
-            <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
+            <h2 className="font-display text-2xl text-warm-white sm:text-5xl">
               Uma produtora feita de gente apaixonada por realizar.
             </h2>
           </div>
-          <div className="space-y-5 text-base text-mist sm:text-lg lg:col-span-7">
+          <div className="space-y-4 text-justified text-[0.95rem] leading-relaxed text-mist sm:space-y-5 sm:text-lg lg:col-span-7">
             <p className="text-warm-white">
               Somos a produtora que transforma boas ideias em grandes realizações.
             </p>
@@ -158,19 +158,19 @@ function QuemSomos() {
 function ComoFazemos() {
   const ref = useScrollReveal();
   return (
-    <section id="como-fazemos" ref={ref} className="on-scroll border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-12 lg:grid-cols-12">
+    <section id="como-fazemos" ref={ref} className="on-scroll border-t border-border py-16 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
               Como fazemos
             </p>
-            <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
+            <h2 className="font-display text-2xl text-warm-white sm:text-5xl">
               Da ideia ao aplauso.
             </h2>
           </div>
           <div className="lg:col-span-7">
-            <p className="text-base text-mist sm:text-lg">
+            <p className="text-justified text-[0.95rem] leading-relaxed text-mist sm:text-lg">
               A ideia é a matéria-prima para todo grande feito. Seja para criar um projeto do
               zero ou resolver o desafio de um cliente, nossa equipe criativa está sempre pronta
               para encontrar a solução. A história é feita de grandes conquistas. Para nós, toda
@@ -180,19 +180,19 @@ function ComoFazemos() {
           </div>
         </div>
 
-        <ol className="stagger mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="stagger mt-10 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {STEPS.map(({ n, title, desc, Icon }, i) => (
             <li
               key={n}
               style={{ ["--i" as string]: `${i}` } as React.CSSProperties}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-night-blue p-6 transition hover:-translate-y-1 hover:border-spotlight/60"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-night-blue p-5 transition hover:-translate-y-1 hover:border-spotlight/60 sm:p-6"
             >
               <div className="flex items-center justify-between">
                 <span className="font-display text-2xl text-spotlight">{n}</span>
-                <Icon size={22} className="text-warm-white/70 transition group-hover:text-spotlight" />
+                <Icon size={22} className="shrink-0 text-warm-white/70 transition group-hover:text-spotlight" />
               </div>
-              <h3 className="mt-6 font-display text-xl text-warm-white">{title}</h3>
-              <p className="mt-3 text-sm text-mist">{desc}</p>
+              <h3 className="mt-4 font-display text-lg text-warm-white sm:mt-6 sm:text-xl">{title}</h3>
+              <p className="mt-2 text-justified text-sm text-mist sm:mt-3">{desc}</p>
             </li>
           ))}
         </ol>
@@ -236,23 +236,23 @@ function Timeline() {
   }, []);
 
   return (
-    <section id="linha-do-tempo" className="border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <section id="linha-do-tempo" className="border-t border-border py-16 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
           Nossa história
         </p>
-        <h2 className="max-w-3xl font-display text-3xl text-warm-white sm:text-5xl">
+        <h2 className="max-w-3xl font-display text-2xl text-warm-white sm:text-5xl">
           30 anos de grandes realizações.
         </h2>
 
-        <div ref={ref} className="timeline relative mt-16">
+        <div ref={ref} className="timeline relative mt-10 sm:mt-16">
           <div ref={fillRef} className="timeline-fill" />
-          <ul className="space-y-14 md:space-y-24">
+          <ul className="space-y-10 md:space-y-24">
             {TIMELINE.map((item, i) => {
               const rightSide = i % 2 === 1;
               return (
                 <li key={item.year} className="relative">
-                  <div className="grid grid-cols-[36px_1fr] gap-4 md:grid-cols-2 md:gap-16">
+                  <div className="grid grid-cols-[20px_minmax(0,1fr)] gap-3 md:grid-cols-2 md:gap-16">
                     {/* Dot column (mobile) / left content (desktop) */}
                     <div className="md:hidden">
                       <TimelineDot />
@@ -301,7 +301,7 @@ function TimelineItem({
     <div className={align === "right" ? "md:items-end" : ""}>
       <p
         aria-hidden="true"
-        className="font-display text-5xl uppercase leading-none tracking-tight sm:text-7xl"
+        className="font-display text-4xl uppercase leading-none tracking-tight sm:text-7xl"
         style={{
           color: "transparent",
           WebkitTextStroke: "1px rgba(245, 185, 66, 0.7)",
@@ -309,7 +309,7 @@ function TimelineItem({
       >
         {item.year}
       </p>
-      <p className="mt-3 max-w-sm text-base text-warm-white sm:text-lg">
+      <p className={`mt-3 max-w-sm text-[0.95rem] text-warm-white sm:text-lg ${align === "right" ? "md:ml-auto" : ""}`}>
         {item.text}
       </p>
       {item.cta && (
@@ -329,12 +329,12 @@ function TimelineItem({
 function VideoSection() {
   const ref = useScrollReveal();
   return (
-    <section ref={ref} className="on-scroll border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <section ref={ref} className="on-scroll border-t border-border py-16 sm:py-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
           Assista
         </p>
-        <h2 className="mb-10 font-display text-3xl text-warm-white sm:text-5xl">
+        <h2 className="mb-6 font-display text-2xl text-warm-white sm:mb-10 sm:text-5xl">
           Bastidor em movimento.
         </h2>
         <div className="relative overflow-hidden rounded-2xl border border-border bg-night-blue">

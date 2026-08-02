@@ -43,7 +43,7 @@ function ProjectPage() {
   return (
     <SiteShell>
       {/* Capa */}
-      <header className="relative flex min-h-[70vh] items-end overflow-hidden pt-24">
+      <header className="relative flex min-h-[62vh] items-end overflow-hidden pt-24 sm:min-h-[70vh]">
         <div className="absolute inset-0" aria-hidden="true">
           {p.photo ? (
             <img
@@ -65,58 +65,58 @@ function ProjectPage() {
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-stage-black via-stage-black/70 to-transparent" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24">
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-12 sm:px-6 sm:pb-24">
           <Link
             to="/"
             hash="projetos"
-            className="mb-8 inline-flex min-h-11 items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-mist transition hover:text-spotlight"
+            className="mb-6 inline-flex min-h-11 items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-mist transition hover:text-spotlight sm:mb-8 sm:text-xs sm:tracking-[0.28em]"
           >
             <ArrowLeft size={14} />
             Todos os projetos
           </Link>
-          <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-spotlight sm:text-[11px]">
+          <p className="mb-3 font-mono text-[9px] font-semibold uppercase leading-relaxed tracking-[0.22em] text-spotlight sm:mb-4 sm:text-[11px] sm:tracking-[0.3em]">
             {p.meta}
           </p>
-          <h1 className="max-w-4xl font-display text-4xl uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl font-display text-[2rem] uppercase leading-[0.95] text-warm-white sm:text-6xl lg:text-7xl">
             {p.name}
           </h1>
-          <p className="mt-6 max-w-2xl font-display text-lg italic text-warm-white sm:text-2xl">
+          <p className="mt-4 max-w-2xl font-display text-base italic text-warm-white sm:mt-6 sm:text-2xl">
             “{p.tagline}”
           </p>
         </div>
       </header>
 
       {/* Case */}
-      <article ref={bodyRef} className="on-scroll border-t border-border py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-12 lg:grid-cols-12">
+      <article ref={bodyRef} className="on-scroll border-t border-border py-14 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:text-xs sm:tracking-[0.3em]">
                 O projeto
               </p>
-              <p className="mt-5 text-lg leading-relaxed text-warm-white">{p.desc}</p>
+              <p className="mt-4 text-justified text-base leading-relaxed text-warm-white sm:mt-5 sm:text-lg">{p.desc}</p>
               {p.image ? (
                 <img
                   src={p.image}
                   alt={p.imageAlt ?? p.name}
                   loading="lazy"
-                  className="mt-8 max-h-24 w-auto opacity-80"
+                  className="mt-6 max-h-20 w-auto opacity-80 sm:mt-8 sm:max-h-24"
                 />
               ) : null}
             </div>
 
             <div className="lg:col-span-8">
               {p.full ? (
-                <p className="text-base leading-relaxed text-mist sm:text-lg">{p.full}</p>
+                <p className="text-justified text-[0.95rem] leading-relaxed text-mist sm:text-lg">{p.full}</p>
               ) : (
-                <p className="text-base leading-relaxed text-mist sm:text-lg">
+                <p className="text-justified text-[0.95rem] leading-relaxed text-mist sm:text-lg">
                   Case completo em breve. Fale com a gente para conhecer os detalhes desta
                   realização.
                 </p>
               )}
 
               {p.photo ? (
-                <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-night-blue">
+                <figure className="mt-8 overflow-hidden rounded-2xl border border-border bg-night-blue sm:mt-10">
                   <img
                     src={p.photo}
                     alt={p.cardAlt ?? p.name}
@@ -130,7 +130,7 @@ function ProjectPage() {
 
               <Link
                 to="/contato"
-                className="btn-primary mt-12 inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-6 text-sm font-semibold text-stage-black"
+                className="btn-primary mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-spotlight px-6 text-sm font-semibold text-stage-black sm:mt-12 sm:w-auto"
               >
                 Quero realizar um evento assim
                 <ArrowRight size={18} />
@@ -145,19 +145,19 @@ function ProjectPage() {
         <Link
           to="/projetos/$slug"
           params={{ slug: next.slug }}
-          className="group mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-4 py-14 transition hover:bg-night-blue/40 sm:px-6 sm:py-20"
+          className="group mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-10 transition hover:bg-night-blue/40 sm:flex sm:justify-between sm:gap-6 sm:px-6 sm:py-20"
         >
-          <div>
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-spotlight">
+          <div className="min-w-0">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-spotlight sm:mb-3 sm:tracking-[0.28em]">
               Próximo projeto
             </p>
-            <p className="font-display text-3xl uppercase leading-none text-warm-white transition group-hover:text-spotlight sm:text-5xl">
+            <p className="font-display text-2xl uppercase leading-none text-warm-white transition group-hover:text-spotlight sm:text-5xl">
               {next.name}
             </p>
           </div>
           <ArrowRight
-            size={36}
-            className="shrink-0 text-warm-white/60 transition group-hover:translate-x-2 group-hover:text-spotlight"
+            size={28}
+            className="shrink-0 text-warm-white/60 transition group-hover:translate-x-2 group-hover:text-spotlight sm:size-9"
           />
         </Link>
       </nav>

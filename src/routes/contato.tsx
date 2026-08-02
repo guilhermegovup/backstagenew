@@ -36,15 +36,15 @@ const contactSchema = z.object({
 function ContatoPage() {
   return (
     <SiteShell>
-      <header className="border-b border-border pt-32 pb-16 sm:pt-40 sm:pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+      <header className="border-b border-border pt-28 pb-12 sm:pt-40 sm:pb-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-5 sm:text-xs sm:tracking-[0.3em]">
             Fale conosco
           </p>
-          <h1 className="max-w-4xl font-display text-4xl uppercase leading-[0.98] text-warm-white sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl font-display text-[2rem] uppercase leading-[0.98] text-warm-white sm:text-6xl lg:text-7xl">
             O que você quer realizar?
           </h1>
-          <p className="mt-6 max-w-2xl text-base text-mist sm:text-lg">
+          <p className="mt-5 max-w-2xl text-justified text-[0.95rem] text-mist sm:mt-6 sm:text-lg">
             Conte sua ideia. Respondemos rápido — não importa o tamanho do projeto, o nível de
             complexidade ou o orçamento disponível.
           </p>
@@ -53,21 +53,21 @@ function ContatoPage() {
 
       <Contato />
 
-      <section className="border-t border-border py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:grid-cols-3 sm:px-6">
-          <div className="flex gap-3 text-sm text-mist">
+      <section className="border-t border-border py-14 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-3 sm:gap-8 sm:px-6">
+          <div className="flex min-w-0 gap-3 text-sm text-mist">
             <MapPin size={18} className="mt-0.5 shrink-0 text-spotlight" />
-            <span>{CONTACT.address}</span>
+            <span className="min-w-0 break-words">{CONTACT.address}</span>
           </div>
-          <div className="flex gap-3 text-sm text-mist">
+          <div className="flex min-w-0 gap-3 text-sm text-mist">
             <Phone size={18} className="mt-0.5 shrink-0 text-spotlight" />
-            <a href={CONTACT.phoneHref} className="min-h-11 hover:text-spotlight">
+            <a href={CONTACT.phoneHref} className="min-h-11 break-words hover:text-spotlight">
               {CONTACT.phone}
             </a>
           </div>
-          <div className="flex gap-3 text-sm text-mist">
+          <div className="flex min-w-0 gap-3 text-sm text-mist">
             <Mail size={18} className="mt-0.5 shrink-0 text-spotlight" />
-            <a href={`mailto:${CONTACT.email}`} className="min-h-11 hover:text-spotlight">
+            <a href={`mailto:${CONTACT.email}`} className="min-h-11 break-all hover:text-spotlight">
               {CONTACT.email}
             </a>
           </div>
@@ -122,20 +122,20 @@ function Contato() {
   };
 
   return (
-    <section id="fale-conosco" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
-          Fale conosco
+    <section id="fale-conosco" ref={ref} className="on-scroll border-t border-border bg-night-blue/40 py-16 sm:py-32">
+      <div className="mx-auto max-w-4xl px-5 sm:px-6">
+        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-4 sm:text-xs sm:tracking-[0.3em]">
+          Formulário
         </p>
-        <h2 className="font-display text-3xl text-warm-white sm:text-5xl">
-          O que você quer realizar?
+        <h2 className="font-display text-2xl text-warm-white sm:text-5xl">
+          Conte sua ideia.
         </h2>
-        <p className="mt-4 text-mist">
+        <p className="mt-4 text-justified text-[0.95rem] text-mist sm:text-base">
           Conte um pouco sobre a sua ideia. Nosso time entra em contato para desenhar
           o próximo grande feito com você.
         </p>
 
-        <form onSubmit={onSubmit} noValidate className="mt-10 grid gap-5 sm:grid-cols-2">
+        <form onSubmit={onSubmit} noValidate className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5">
           <Field label="Primeiro Nome" name="firstName" required error={errors.firstName} />
           <Field label="Sobrenome" name="lastName" error={errors.lastName} />
           <Field label="E-mail" name="email" type="email" required error={errors.email} />
@@ -147,7 +147,7 @@ function Contato() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-primary inline-flex min-h-12 items-center gap-2 rounded-full bg-spotlight px-8 text-sm font-semibold text-stage-black disabled:opacity-60"
+              className="btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-spotlight px-8 text-sm font-semibold text-stage-black disabled:opacity-60 sm:w-auto"
             >
               {submitting ? "Enviando..." : "Fale conosco"}
               <ArrowRight size={18} />
