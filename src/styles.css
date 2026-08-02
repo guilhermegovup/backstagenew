@@ -461,3 +461,11 @@ html.light header[data-over-hero="true"] {
   --muted: #1A2340;
   --border: rgba(247, 243, 234, 0.10);
 }
+
+/* Texto corrido justificado (com hifenização pt-BR) */
+@utility text-justified {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
