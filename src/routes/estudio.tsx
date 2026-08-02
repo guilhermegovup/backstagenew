@@ -40,15 +40,15 @@ function Estudio() {
 
 function PageHeader() {
   return (
-    <header className="border-b border-border pt-32 pb-16 sm:pt-40 sm:pb-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-spotlight">
+    <header className="border-b border-border pt-28 pb-12 sm:pt-40 sm:pb-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-spotlight sm:mb-5 sm:text-xs sm:tracking-[0.3em]">
           Estúdio
         </p>
-        <h1 className="max-w-4xl font-display text-4xl uppercase leading-[0.98] text-warm-white sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-4xl font-display text-[2rem] uppercase leading-[0.98] text-warm-white sm:text-6xl lg:text-7xl">
           Quem faz acontecer
         </h1>
-        <p className="mt-6 max-w-2xl text-base text-mist sm:text-lg">
+        <p className="mt-5 max-w-2xl text-justified text-[0.95rem] text-mist sm:mt-6 sm:text-lg">
           Engenheiros, arquitetos, comunicólogos e designers reunidos para botar ideias de pé —
           há quase 30 anos.
         </p>
