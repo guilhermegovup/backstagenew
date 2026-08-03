@@ -1,4 +1,5 @@
 import { Lightbulb, Ruler, Wrench, Sparkles } from "lucide-react";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 
 export type Project = {
   name: string;
