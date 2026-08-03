@@ -26,8 +26,8 @@ export const Route = createFileRoute("/")({
         content:
           "Backstage: quase 30 anos transformando ideias em eventos inesquecíveis — da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara.",
       },
-      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
-      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
+      { property: "og:image", content: `https://backstagenew.lovable.app${arvore2025.url}` },
+      { name: "twitter:image", content: `https://backstagenew.lovable.app${arvore2025.url}` },
     ],
   }),
   component: Home,
@@ -57,7 +57,7 @@ function Hero() {
     <section className="dark-hero relative flex min-h-[100svh] items-end overflow-hidden sm:min-h-[92vh]">
       <div className="absolute inset-0" aria-hidden="true">
         <img
-          src="/projetos/fotos/arvore.webp"
+          src={arvore2025.url}
           alt=""
           className="h-full w-full object-cover object-[60%_center] sm:object-center"
         />

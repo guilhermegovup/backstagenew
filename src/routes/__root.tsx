@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 import {
   Outlet,
   Link,
@@ -88,8 +89,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Backstage — Produção de Eventos no Rio de Janeiro" },
       { name: "twitter:description", content: "Backstage: quase 30 anos transformando ideias em eventos inesquecíveis — da maior árvore de natal flutuante do mundo ao Mickey na Baía de Guanabara." },
-      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
-      { name: "twitter:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
+      { property: "og:image", content: `https://backstagenew.lovable.app${arvore2025.url}` },
+      { name: "twitter:image", content: `https://backstagenew.lovable.app${arvore2025.url}` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

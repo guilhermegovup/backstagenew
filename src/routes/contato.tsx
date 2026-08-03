@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/contato")({
       },
       { property: "og:title", content: "Fale com a Backstage" },
       { property: "og:description", content: "O que você quer realizar?" },
-      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
+      { property: "og:image", content: `https://backstagenew.lovable.app${arvore2025.url}` },
     ],
   }),
   component: ContatoPage,

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { STEPS, TIMELINE } from "@/lib/site-data";
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/estudio")({
         property: "og:description",
         content: "Equipe multidisciplinar, método de produção e 30 anos de história.",
       },
-      { property: "og:image", content: "https://backstagenew.lovable.app/projetos/hero-arvore.jpg" },
+      { property: "og:image", content: `https://backstagenew.lovable.app${arvore2025.url}` },
     ],
   }),
   component: Estudio,
