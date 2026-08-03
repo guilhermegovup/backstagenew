@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowDown } from "lucide-react";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 import { SiteShell } from "@/components/site/chrome";
 import {
   Clientes,
