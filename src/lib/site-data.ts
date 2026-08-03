@@ -22,9 +22,9 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     name: "Árvore do Rio",
-    photo: "/projetos/fotos/arvore.webp",
-    photoW: 1212,
-    photoH: 909,
+    photo: arvore2025.url,
+    photoW: 1920,
+    photoH: 1080,
     slug: "arvore-do-rio",
     meta: "Natal · Desde 1996 / Lagoa Rodrigo de Freitas",
     tagline: "O Natal que flutua no coração da cidade.",
