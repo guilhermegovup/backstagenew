@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 import { PROJECTS } from "@/lib/site-data";
 import { SiteShell } from "@/components/site/chrome";
 import { useScrollReveal } from "@/components/site/bits";
