@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import arvore2025 from "@/assets/arvore-do-rio-2025.jpg.asset.json";
 import { PROJECTS } from "@/lib/site-data";
 import { SiteShell } from "@/components/site/chrome";
 import { useScrollReveal } from "@/components/site/bits";
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/projetos/$slug")({
     if (!p) return {};
     const title = `${p.name} — Backstage`;
     const description = p.full ? p.full.slice(0, 180) : p.desc;
-    const image = p.photo ? `${BASE}${p.photo}` : `${BASE}/projetos/hero-arvore.jpg`;
+    const image = p.photo ? `${BASE}${p.photo}` : `${BASE}${arvore2025.url}`;
     return {
       meta: [
         { title },
