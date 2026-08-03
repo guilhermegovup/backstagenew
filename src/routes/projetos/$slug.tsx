@@ -18,7 +18,7 @@ export const Route = createFileRoute("/projetos/$slug")({
     if (!p) return {};
     const title = `${p.name} — Backstage`;
     const description = p.full ? p.full.slice(0, 180) : p.desc;
-    const image = p.photo ? `${BASE}${p.photo}` : `${BASE}/projetos/hero-arvore.jpg`;
+    const image = p.photo ? `${BASE}${p.photo}` : `${BASE}${arvore2025.url}`;
     return {
       meta: [
         { title },
