@@ -95,14 +95,6 @@ function ProjectPage() {
                 O projeto
               </p>
               <p className="mt-4 text-justified text-base leading-relaxed text-warm-white sm:mt-5 sm:text-lg">{p.desc}</p>
-              {p.image ? (
-                <img
-                  src={p.image}
-                  alt={p.imageAlt ?? p.name}
-                  loading="lazy"
-                  className="mt-6 max-h-20 w-auto opacity-80 sm:mt-8 sm:max-h-24"
-                />
-              ) : null}
             </div>
 
             <div className="lg:col-span-8">
